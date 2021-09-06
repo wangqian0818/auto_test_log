@@ -1,0 +1,272 @@
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/firewall_ddos_attack/function.py
+result: test_ddos_rst_flood -- passed		20210904_08-36-23
+result: test_ddos_ack_flood -- passed		20210904_08-36-33
+result: test_ddos_syn_flood -- passed		20210904_08-36-43
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/firewall_ddos_attack/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/firewall_flood_attack/function.py
+result: test_imcp_flood -- passed		20210904_08-37-15
+result: test_udp_flood -- passed		20210904_08-37-37
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/firewall_flood_attack/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_user/function.py
+result: test_ftp_check_user_a1 -- failed		20210904_08-42-42
+result: test_ftp_check_user_a2 -- failed		20210904_08-47-37
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_user/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_upload/function.py
+result: test_ftp_check_upload_a1 -- failed		20210904_08-52-42
+result: test_ftp_check_upload_a2 -- failed		20210904_08-57-38
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_upload/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_download/function.py
+result: test_ftp_check_download_a1 -- failed		20210904_09-02-41
+result: test_ftp_check_download_a2 -- failed		20210904_09-07-36
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_download/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_alltype/function.py
+result: test_ftp_check_alltype_a1 -- failed		20210904_09-12-40
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/ftp_check_alltype/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/http_check_get/function.py
+result: test_http_check_get_a1 -- failed		20210904_09-17-42
+result: test_http_check_get_a2 -- failed		20210904_09-22-39
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/http_check_get/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/http_check_post/function.py
+result: test_http_check_post_a1 -- failed		20210904_09-27-42
+result: test_http_check_post_a2 -- failed		20210904_09-32-39
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/http_check_post/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/http_check_uri/function.py
+result: test_http_check_uri_a1 -- failed		20210904_09-37-42
+result: test_http_check_uri_a2 -- failed		20210904_09-42-38
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/http_check_uri/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/http_check_get_post_uri/function.py
+result: test_http_check_get_post_uri_a1 -- failed		20210904_09-47-41
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/http_check_get_post_uri/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/http_check_MIME_allow/function.py
+result: test_http_check_MIME_allow_a1 -- failed		20210904_09-52-45
+result: test_http_check_MIME_allow_a2 -- failed		20210904_09-57-39
+result: test_http_check_MIME_allow_a3 -- failed		20210904_10-02-35
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/http_check_MIME_allow/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/http_check_MIME_deny/function.py
+result: test_http_check_MIME_deny_a1 -- failed		20210904_10-07-38
+result: test_http_check_MIME_deny_a2 -- failed		20210904_10-12-32
+result: test_http_check_MIME_deny_a3 -- failed		20210904_10-17-27
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/http_check_MIME_deny/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/http_check_get_post_uri_MIME/function.py
+result: test_http_check_get_post_uri_MIME_a1 -- failed		20210904_10-22-31
+result: test_http_check_get_post_uri_MIME_a2 -- failed		20210904_10-27-28
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/http_check_get_post_uri_MIME/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_file/function.py
+result: test_mail_check_file_a1 -- failed		20210904_10-34-28
+result: test_mail_check_file_a2 -- failed		20210904_10-41-21
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_file/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_addr/function.py
+result: test_mail_check_addr_a1 -- failed		20210904_10-48-22
+result: test_mail_check_addr_a2 -- failed		20210904_10-55-13
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_addr/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_subject/function.py
+result: test_mail_check_subject_a1 -- failed		20210904_11-02-13
+result: test_mail_check_subject_a2 -- failed		20210904_11-09-04
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_subject/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_extend/function.py
+result: test_mail_check_extend_a1 -- failed		20210904_11-16-00
+result: test_mail_check_extend_a2 -- failed		20210904_11-22-51
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_extend/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_alltype/function.py
+result: test_mail_check_alltype_a1 -- failed		20210904_11-29-53
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_rbm/mail_check_alltype/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/cipso_blp_biba/function.py
+result: test_cipso_blp -- passed		20210904_11-30-07
+result: test_cipso_biba -- passed		20210904_11-30-14
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/cipso_blp_biba/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/cipso_cat/function.py
+result: test_cipso_cat_maximum -- passed		20210904_11-30-28
+result: test_cipso_cat_minimum -- passed		20210904_11-30-35
+result: test_cipso_cat_othermum -- passed		20210904_11-30-41
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/cipso_cat/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/cipso_doi/function.py
+result: test_cipso_doi_maximum -- passed		20210904_11-30-56
+result: test_cipso_doi_minimum -- passed		20210904_11-31-02
+result: test_cipso_other_doi -- passed		20210904_11-31-09
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/cipso_doi/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/cipso_gw/function.py
+result: test_gw -- passed		20210904_11-31-25
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/cipso_gw/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/cipso_inc_1bit/function.py
+result: test_cipso_inc -- passed		20210904_11-31-39
+result: test_cipso_1bit -- passed		20210904_11-31-46
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/cipso_inc_1bit/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/cipso_level/function.py
+result: test_cipso_level_maximum -- passed		20210904_11-32-00
+result: test_cipso_level_minimum -- passed		20210904_11-32-07
+result: test_cipso_other_level -- passed		20210904_11-32-14
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/cipso_level/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/cipso_protocol/function.py
+result: test_tcp_cat64 -- passed		20210904_11-32-28
+result: test_cipso_icmp_cat64 -- passed		20210904_11-32-35
+result: test_cipso_icmp -- passed		20210904_11-32-43
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/cipso_protocol/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/mss/function.py
+result: test_mss_a1 -- passed		20210904_11-33-46
+result: test_acl_mode_a2 -- passed		20210904_11-34-41
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/mss/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_category/function.py
+result: test_acl_category_0 -- passed		20210904_11-35-14
+result: test_acl_category_ffff -- passed		20210904_11-35-37
+result: test_acl_category_f000 -- passed		20210904_11-36-00
+result: test_acl_category_ff00 -- passed		20210904_11-36-23
+result: test_acl_category_fff0 -- passed		20210904_11-36-47
+result: test_acl_category_0fff -- passed		20210904_11-37-10
+result: test_acl_category_f0ff -- passed		20210904_11-37-33
+result: test_acl_category_ff0f -- passed		20210904_11-37-57
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_category/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_CURD/function.py
+result: test_acl_CURD_a1 -- passed		20210904_11-38-09
+result: test_acl_CURD_a2 -- passed		20210904_11-38-10
+result: test_acl_CURD_a3 -- passed		20210904_11-38-12
+result: test_acl_CURD_a4 -- passed		20210904_11-38-17
+result: test_acl_CURD_a5 -- passed		20210904_11-38-41
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_CURD/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_drop/function.py
+result: test_acl_drop_a1 -- passed		20210904_11-39-56
+result: test_acl_drop_a2 -- passed		20210904_11-41-01
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_drop/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_match/function.py
+result: test_acl_match_a1 -- passed		20210904_11-41-54
+result: test_acl_match_a2 -- passed		20210904_11-42-39
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_match/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_mode/function.py
+result: test_acl_mode_a1 -- passed		20210904_11-43-31
+result: test_acl_mode_a2 -- passed		20210904_11-44-14
+result: test_acl_mode_a3 -- passed		20210904_11-44-58
+result: test_acl_mode_a4 -- passed		20210904_11-45-43
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_mode/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_old/function.py
+result: test_acl_old_a1 -- failed		20210904_11-46-16
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_old/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_priority_other/function.py
+result: test_acl_priority_other_a1 -- passed		20210904_11-46-47
+result: test_acl_priority_other_a2 -- passed		20210904_11-47-11
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_priority_other/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_priority_quintet_diff/function.py
+result: test_acl_priority_quintet_diff_a1 -- passed		20210904_11-47-43
+result: test_acl_priority_quintet_diff_a2 -- passed		20210904_11-48-18
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_priority_quintet_diff/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_priority_quintet_same/function.py
+result: test_acl_priority_quintet_same_a1 -- passed		20210904_11-48-50
+result: test_acl_priority_quintet_same_a2 -- passed		20210904_11-49-13
+result: test_acl_priority_quintet_same_a3 -- passed		20210904_11-49-37
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/tupleacl_priority_quintet_same/function.py
+
+
+
+--------------------- 开始执行 case：E:/Projects_Py/auto_test/Case_ssh/vxlan_tupleacl_category/function.py
+result: test_vxlan_acl_category_0 -- passed		20210904_11-50-09
+result: test_vxlan_acl_category_ffff -- passed		20210904_11-50-33
+result: test_vxlan_acl_category_f000 -- passed		20210904_11-50-56
+result: test_vxlan_acl_category_ff00 -- passed		20210904_11-51-19
+result: test_vxlan_acl_category_fff0 -- passed		20210904_11-51-42
+result: test_vxlan_acl_category_0fff -- passed		20210904_11-52-05
+result: test_vxlan_acl_category_f0ff -- passed		20210904_11-52-28
+result: test_vxlan_acl_category_ff0f -- passed		20210904_11-52-53
+--------------------- 执行结束 case：E:/Projects_Py/auto_test/Case_ssh/vxlan_tupleacl_category/function.py
+
+

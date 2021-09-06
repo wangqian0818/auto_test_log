@@ -1,0 +1,57 @@
+{
+  "uid" : "207dd2d357a945d",
+  "name" : "test_rabbitmq",
+  "fullName" : "Case_ssh.case2.function.Test_acl#test_rabbitmq",
+  "historyId" : "9f3f92b49c66d50bc99be8c88f3173b8",
+  "time" : {
+    "start" : 1582422240310,
+    "stop" : 1582422240310,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "statusMessage" : "Skipped: unconditional skip",
+  "statusTrace" : "('Case_ssh/case2/function.py', 72, 'Skipped: unconditional skip')",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "Case_ssh.case2"
+  }, {
+    "name" : "suite",
+    "value" : "function"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_acl"
+  }, {
+    "name" : "host",
+    "value" : "localhost.localdomain"
+  }, {
+    "name" : "thread",
+    "value" : "16067-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "Case_ssh.case2.function"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "207dd2d357a945d.json",
+  "parameterValues" : [ ]
+}

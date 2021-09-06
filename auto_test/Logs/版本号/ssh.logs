@@ -1,0 +1,3980 @@
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clearselabel --clearexport cardid=1
+Domain: 10.10.88.3 Receive: 
+Error: unkown item, --clearselabel
+Usage: tupleacl [OPREATION] [OPTION] DATA
+Operation:
+	--clear              	clear all the rules
+	--add                	add a rule
+	--del                	remove a rule
+	--get                	get all the rules
+	--bat                	batch add/del rules in file
+	--query              	query one rules, options: sip, dip, sp, dp, l4p, netif
+	--help               	print the information of help
+Options:
+	Basic options:
+	--id <id>            	rule id can be specified or auto-generated
+	--netif <1|2|3|4>    	netif, default all the netif
+	--sip <sip>          	source address
+	--dip <dip>          	dest address
+	--sp  <sport>        	source port
+	--dp  <dport>        	dest port
+	--l4p <protocol>     	protocol
+	--action <forward|drop|auth|confuse>   	action
+	Extended options:
+	--prior <value>      	rule priority
+	--ttl  <ttl>         	aging of rule
+	--list <file>        	file contains ACL`s list
+	About Selabel:
+	--netlbl <strip|tag> 	strip or tag a label for packet, default not strip and not tag
+	--drop  <on|off>     	drop packet after the label matches, default off
+	--match <n|{>        	the matching criteria of value is intersection or subset, default {
+	--mode  <BLP|BIBA>   	BLP or BIBA mode for level matches, default BIBA
+	--doi   <doi>        	DOI number
+	--level <level>      	sensitivity level, default 0
+	--type  <type>       	1 2 or 5, tag list number, surpport 1 only
+	--value <categories> 	categories values
+	About Qos:
+	--qos0  <value0>     	qos of positive traffic
+	--qos1  <value1>     	qos of reverse traffic
+	--qmode <rate|data>  	rate limit or data limit, default rate
+	--qbucket <s|p>      	single bucket or perflow bucket, default single
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30tupleacl --clearselabel --clear
+Domain: 10.10.88.3 Receive: 
+Error: unkown item, --clearselabel
+Usage: defconf [OPTION] DATA
+Options:
+	--show                   	show default configure
+	--action <forward|drop|confuse|auth>     	set the default action
+	--elif <0|1|2|3>         	set the elif of report
+	--netflow <on|off>       	set the switch of flow report
+	--cycle <cycle>          	set the cycle(seconds) of flow report
+	--ttl <ttl>              	set the ttl of flow report
+	--ipv4acl <on|off>       	set the switch of ipv4acl report
+	--ipv4aclcycle <cycle>   	set the cycle(seconds) of ipv4acl report
+	--mode <0|1|2|3>         	set the mode routed
+	                         	  0=PCI-NIC, 1=Loopback, 2=Bridge, 3=Free.
+	--domain <on|off>        	set the switch of secure domain
+	--ipmac  <on|off>        	set the switch of binding ip-mac
+	--ipttl (0,255]          	set the ttl of ip packet
+	--tcpmss (0, 65535]      	set the mss of tcp packet
+	--syncookie <on|off>     	set the switch of syncookie
+	 --noflow <on|off>       	set the switch of filter the no-flow pkt
+	 --ckoption <on|off>     	set the switch of check the option of pkts
+	--droperr <on|off>       	set the switch of filter error pkt
+	--selabel <on|off>       	set the switch of selabel, default on
+	--db2se <on|off>         	configure se parameters by agentjsac'db
+	--vf <on|off>            	send traffic to vf of driver
+	--ext <on|off>
+	--help                   	print the information of help
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clearselabel --clearexport cardid=1
+Domain: 10.10.88.3 Receive: 
+Error: unkown item, --clearselabel
+Usage: tupleacl [OPREATION] [OPTION] DATA
+Operation:
+	--clear              	clear all the rules
+	--add                	add a rule
+	--del                	remove a rule
+	--get                	get all the rules
+	--bat                	batch add/del rules in file
+	--query              	query one rules, options: sip, dip, sp, dp, l4p, netif
+	--help               	print the information of help
+Options:
+	Basic options:
+	--id <id>            	rule id can be specified or auto-generated
+	--netif <1|2|3|4>    	netif, default all the netif
+	--sip <sip>          	source address
+	--dip <dip>          	dest address
+	--sp  <sport>        	source port
+	--dp  <dport>        	dest port
+	--l4p <protocol>     	protocol
+	--action <forward|drop|auth|confuse>   	action
+	Extended options:
+	--prior <value>      	rule priority
+	--ttl  <ttl>         	aging of rule
+	--list <file>        	file contains ACL`s list
+	About Selabel:
+	--netlbl <strip|tag> 	strip or tag a label for packet, default not strip and not tag
+	--drop  <on|off>     	drop packet after the label matches, default off
+	--match <n|{>        	the matching criteria of value is intersection or subset, default {
+	--mode  <BLP|BIBA>   	BLP or BIBA mode for level matches, default BIBA
+	--doi   <doi>        	DOI number
+	--level <level>      	sensitivity level, default 0
+	--type  <type>       	1 2 or 5, tag list number, surpport 1 only
+	--value <categories> 	categories values
+	About Qos:
+	--qos0  <value0>     	qos of positive traffic
+	--qos1  <value1>     	qos of reverse traffic
+	--qmode <rate|data>  	rate limit or data limit, default rate
+	--qbucket <s|p>      	single bucket or perflow bucket, default single
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30tupleacl --clearselabel --clear
+Domain: 10.10.88.3 Receive: 
+Error: unkown item, --clearselabel
+Usage: defconf [OPTION] DATA
+Options:
+	--show                   	show default configure
+	--action <forward|drop|confuse|auth>     	set the default action
+	--elif <0|1|2|3>         	set the elif of report
+	--netflow <on|off>       	set the switch of flow report
+	--cycle <cycle>          	set the cycle(seconds) of flow report
+	--ttl <ttl>              	set the ttl of flow report
+	--ipv4acl <on|off>       	set the switch of ipv4acl report
+	--ipv4aclcycle <cycle>   	set the cycle(seconds) of ipv4acl report
+	--mode <0|1|2|3>         	set the mode routed
+	                         	  0=PCI-NIC, 1=Loopback, 2=Bridge, 3=Free.
+	--domain <on|off>        	set the switch of secure domain
+	--ipmac  <on|off>        	set the switch of binding ip-mac
+	--ipttl (0,255]          	set the ttl of ip packet
+	--tcpmss (0, 65535]      	set the mss of tcp packet
+	--syncookie <on|off>     	set the switch of syncookie
+	 --noflow <on|off>       	set the switch of filter the no-flow pkt
+	 --ckoption <on|off>     	set the switch of check the option of pkts
+	--droperr <on|off>       	set the switch of filter error pkt
+	--selabel <on|off>       	set the switch of selabel, default on
+	--db2se <on|off>         	configure se parameters by agentjsac'db
+	--vf <on|off>            	send traffic to vf of driver
+	--ext <on|off>
+	--help                   	print the information of help
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clearselabel --clearexport cardid=1
+Domain: 10.10.88.3 Receive: 
+Error: unkown item, --clearselabel
+Usage: tupleacl [OPREATION] [OPTION] DATA
+Operation:
+	--clear              	clear all the rules
+	--add                	add a rule
+	--del                	remove a rule
+	--get                	get all the rules
+	--bat                	batch add/del rules in file
+	--query              	query one rules, options: sip, dip, sp, dp, l4p, netif
+	--help               	print the information of help
+Options:
+	Basic options:
+	--id <id>            	rule id can be specified or auto-generated
+	--netif <1|2|3|4>    	netif, default all the netif
+	--sip <sip>          	source address
+	--dip <dip>          	dest address
+	--sp  <sport>        	source port
+	--dp  <dport>        	dest port
+	--l4p <protocol>     	protocol
+	--action <forward|drop|auth|confuse>   	action
+	Extended options:
+	--prior <value>      	rule priority
+	--ttl  <ttl>         	aging of rule
+	--list <file>        	file contains ACL`s list
+	About Selabel:
+	--netlbl <strip|tag> 	strip or tag a label for packet, default not strip and not tag
+	--drop  <on|off>     	drop packet after the label matches, default off
+	--match <n|{>        	the matching criteria of value is intersection or subset, default {
+	--mode  <BLP|BIBA>   	BLP or BIBA mode for level matches, default BIBA
+	--doi   <doi>        	DOI number
+	--level <level>      	sensitivity level, default 0
+	--type  <type>       	1 2 or 5, tag list number, surpport 1 only
+	--value <categories> 	categories values
+	About Qos:
+	--qos0  <value0>     	qos of positive traffic
+	--qos1  <value1>     	qos of reverse traffic
+	--qmode <rate|data>  	rate limit or data limit, default rate
+	--qbucket <s|p>      	single bucket or perflow bucket, default single
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30tupleacl --clearselabel --clear
+Domain: 10.10.88.3 Receive: 
+Error: unkown item, --clearselabel
+Usage: defconf [OPTION] DATA
+Options:
+	--show                   	show default configure
+	--action <forward|drop|confuse|auth>     	set the default action
+	--elif <0|1|2|3>         	set the elif of report
+	--netflow <on|off>       	set the switch of flow report
+	--cycle <cycle>          	set the cycle(seconds) of flow report
+	--ttl <ttl>              	set the ttl of flow report
+	--ipv4acl <on|off>       	set the switch of ipv4acl report
+	--ipv4aclcycle <cycle>   	set the cycle(seconds) of ipv4acl report
+	--mode <0|1|2|3>         	set the mode routed
+	                         	  0=PCI-NIC, 1=Loopback, 2=Bridge, 3=Free.
+	--domain <on|off>        	set the switch of secure domain
+	--ipmac  <on|off>        	set the switch of binding ip-mac
+	--ipttl (0,255]          	set the ttl of ip packet
+	--tcpmss (0, 65535]      	set the mss of tcp packet
+	--syncookie <on|off>     	set the switch of syncookie
+	 --noflow <on|off>       	set the switch of filter the no-flow pkt
+	 --ckoption <on|off>     	set the switch of check the option of pkts
+	--droperr <on|off>       	set the switch of filter error pkt
+	--selabel <on|off>       	set the switch of selabel, default on
+	--db2se <on|off>         	configure se parameters by agentjsac'db
+	--vf <on|off>            	send traffic to vf of driver
+	--ext <on|off>
+	--help                   	print the information of help
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Error: failed to add.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 test_a1.pcap
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 test_a1.pcap
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000004 seconds
+Rated: 21500000.0 Bps, 172.00 Mbps, 250000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 read.py test_a1.pcap 0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000011 seconds
+Rated: 7818181.8 Bps, 62.54 Mbps, 90909.09 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py test_a1.pcap 0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000011 seconds
+Rated: 7818181.8 Bps, 62.54 Mbps, 90909.09 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000011 seconds
+Rated: 7818181.8 Bps, 62.54 Mbps, 90909.09 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000004 seconds
+Rated: 21500000.0 Bps, 172.00 Mbps, 250000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000011 seconds
+Rated: 7818181.8 Bps, 62.54 Mbps, 90909.09 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: 00
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000005 seconds
+Rated: 17200000.0 Bps, 137.60 Mbps, 200000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 0 rules
+
+Domain: 10.10.88.5 Send: export cardid=0
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: tupleacl --get
+Domain: 10.10.88.5 Receive: 
+<GET|DEL|ADD> 2 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        192.168.11.14   0     192.168.20.16   8889  6   1   0   1     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+2        192.168.11.250  0     192.168.20.250  8889  6   1   0   1     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: tupleacl --get
+Domain: 10.10.88.3 Receive: 
+<GET|DEL|ADD> 0 rules
+
+Domain: 10.10.88.5 Send: export cardid=0
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: tupleacl --get
+Domain: 10.10.88.5 Receive: 
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        192.168.11.250  0     192.168.20.250  8889  6   1   0   1     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: export cardid=0
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: export cardid=1
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: export cardid=0
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: export cardid=1
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.5 Receive: 
+This item does not exist.
+
+Domain: 10.10.88.5 Send: export cardid=0
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: export cardid=1
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.5 Receive: 
+This item does not exist.
+
+Domain: 10.10.88.5 Send: export cardid=0
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: export cardid=1
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.5 Receive: 
+This item does not exist.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.5 Send: export cardid=0
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: export cardid=1
+Domain: 10.10.88.5 Receive: 
+
+Domain: 10.10.88.5 Send: switch-jsac --set --switch on
+Domain: 10.10.88.5 Receive: 
+Set successfully.
+
+Domain: 10.10.88.5 Send: defconf  --action forward
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --cycle 15
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.5 Receive: 
+Success.
+
+Domain: 10.10.88.5 Send: tupleacl --clear
+Domain: 10.10.88.5 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.5 Send: selabel --clear
+Domain: 10.10.88.5 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.5 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.5 Receive: 
+This item does not exist.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/test.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000011 seconds
+Rated: 7818181.8 Bps, 62.54 Mbps, 90909.09 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000011 seconds
+Rated: 7818181.8 Bps, 62.54 Mbps, 90909.09 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000011 seconds
+Rated: 7818181.8 Bps, 62.54 Mbps, 90909.09 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000004 seconds
+Rated: 21500000.0 Bps, 172.00 Mbps, 250000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000010 seconds
+Rated: 8600000.0 Bps, 68.80 Mbps, 100000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/sniff.py enp3s00 tcp 1 /opt/pkt/test_a1.pcap
+Domain: 10.10.88.3 Send: tupleacl --add --dp 8889 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:1)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 8889
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         8889  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.3 Send: tupleacl --add --dp 9999 --action forward
+Domain: 10.10.88.3 Receive: 
+Add 1 rules(id:2)successfully.
+
+Domain: 10.10.88.3 Send: tupleacl --query --dp 9999
+Domain: 10.10.88.3 Receive: 
+Query successfully.
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+2        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+
+Domain: 10.10.88.5 Send: tcpreplay -i enp3s00 -l 1 /opt/pkt/syn_16_14_3.pcap
+Domain: 10.10.88.5 Receive: 
+Actual: 1 packets (86 bytes) sent in 0.000004 seconds
+Rated: 21500000.0 Bps, 172.00 Mbps, 250000.00 pps
+Statistics for network device: enp3s00
+	Successful packets:        1
+	Failed packets:            0
+	Truncated packets:         0
+	Retried packets (ENOBUFS): 0
+	Retried packets (EAGAIN):  0
+
+Domain: 10.10.88.3 Send: python3.6 /opt/pkt/read.py /opt/pkt/test_a1.pcap 0
+Domain: 10.10.88.3 Receive: 
+b'\x00\x00\x00\x10\x01\x05\x00\x0e\xc0'
+
+Domain: 10.10.88.3 Send: export cardid=0
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+
+Domain: 10.10.88.3 Send: export cardid=1
+Domain: 10.10.88.3 Receive: 
+
+Domain: 10.10.88.3 Send: switch-jsac --set --switch on
+Domain: 10.10.88.3 Receive: 
+Set successfully.
+
+Domain: 10.10.88.3 Send: defconf  --action forward
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --cycle 15
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: defconf --ipv4aclcycle 30
+Domain: 10.10.88.3 Receive: 
+Success.
+
+Domain: 10.10.88.3 Send: tupleacl --clear
+Domain: 10.10.88.3 Receive: 
+Clear all rules successfully.
+
+Domain: 10.10.88.3 Send: selabel --clear
+Domain: 10.10.88.3 Receive: 
+Clear successfully.
+

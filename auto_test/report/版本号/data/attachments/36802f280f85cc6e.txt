@@ -1,0 +1,6 @@
+tupleacl --add --dp 9999 --action forward 指令发送成功!
+tupleacl --get 指令发送成功!
+<GET|DEL|ADD> 1 rules
+id       sip             sp    dip             dp    l4p act in  prior ttl   qos0          qos1          qmode qbucket match strip tag drop mode doi   level type value        
+1        0.0.0.0         0     0.0.0.0         9999  0   0   0   0     0     0             0             0     0       0     0     0   0    0    0     0     0    0x0,0x0,0x0,0x0
+

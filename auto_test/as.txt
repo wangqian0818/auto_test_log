@@ -1,0 +1,243 @@
+.
+├── as.txt
+├── AutoTest.zip
+├── Case_rbm
+├── Case_ssh
+│   ├── case1
+│   │   ├── function.py
+│   │   ├── index.py
+│   │   ├── __init__.py
+│   │   ├── message.py
+│   │   └── __pycache__
+│   │       ├── function.cpython-36-pytest-5.3.5.pyc
+│   │       ├── index.cpython-36-pytest-5.3.2.pyc
+│   │       ├── index.cpython-36-pytest-5.3.5.pyc
+│   │       └── __init__.cpython-36.pyc
+│   ├── case2
+│   │   ├── 1
+│   │   ├── function.py
+│   │   ├── index.py
+│   │   ├── __init__.py
+│   │   ├── message.py
+│   │   └── __pycache__
+│   │       ├── aa.cpython-36-pytest-5.3.5.pyc
+│   │       ├── command.cpython-36.pyc
+│   │       ├── fun.cpython-36.pyc
+│   │       ├── function.cpython-36-pytest-5.3.5.pyc
+│   │       ├── index.cpython-36.pyc
+│   │       ├── index.cpython-36-pytest-5.3.2.pyc
+│   │       ├── index.cpython-36-pytest-5.3.5.pyc
+│   │       ├── __init__.cpython-36.pyc
+│   │       └── testacl.cpython-36-pytest-5.3.5.pyc
+│   └── case3
+│       ├── function.py
+│       ├── index.py
+│       ├── __init__.py
+│       ├── message.py
+│       └── __pycache__
+│           ├── index.cpython-36-pytest-5.3.2.pyc
+│           ├── index.cpython-36-pytest-5.3.5.pyc
+│           └── __init__.cpython-36.pyc
+├── common
+│   ├── baseinfo.py
+│   ├── caseselect_rbm.py
+│   ├── caseselect_ssh.py
+│   ├── clear_env.py
+│   ├── email_send.py
+│   ├── fun.py
+│   ├── message.py
+│   ├── pcap.py
+│   ├── __pycache__
+│   │   ├── baseinfo.cpython-36.pyc
+│   │   ├── baseinfo.cpython-37.pyc
+│   │   ├── caseselect.cpython-36.pyc
+│   │   ├── clr_env.cpython-36.pyc
+│   │   ├── email.cpython-36.pyc
+│   │   ├── fun.cpython-36.pyc
+│   │   ├── logfile.cpython-36.pyc
+│   │   ├── pcap.cpython-36.pyc
+│   │   ├── rabbitmq.cpython-36.pyc
+│   │   └── ssh.cpython-36.pyc
+│   ├── rabbitmq.py
+│   ├── ssh.py
+│   ├── Test.py
+│   └── \345\270\256\345\212\251\346\226\207\346\241\243.txt
+├── Logs
+│   ├── test1.0.0
+│   │   └── ssh.logs
+│   ├── \347\211\210\346\234\254\345\217\267
+│   │   ├── rabbitmq.logs
+│   │   └── ssh.logs
+│   └── \347\211\210\346\234\254\345\217\267_ssh
+├── report
+│   ├── nohup.out
+│   ├── test1.0.0_ssh
+│   │   ├── app.js
+│   │   ├── data
+│   │   │   ├── attachments
+│   │   │   ├── behaviors.csv
+│   │   │   ├── behaviors.json
+│   │   │   ├── categories.csv
+│   │   │   ├── categories.json
+│   │   │   ├── packages.json
+│   │   │   ├── suites.csv
+│   │   │   ├── suites.json
+│   │   │   ├── test-cases
+│   │   │   │   ├── 2f22d6a34f0c9cb2.json
+│   │   │   │   └── 9229f121566f74ec.json
+│   │   │   └── timeline.json
+│   │   ├── export
+│   │   │   ├── influxDbData.txt
+│   │   │   ├── mail.html
+│   │   │   └── prometheusData.txt
+│   │   ├── favicon.ico
+│   │   ├── history
+│   │   │   ├── categories-trend.json
+│   │   │   ├── duration-trend.json
+│   │   │   ├── history.json
+│   │   │   ├── history-trend.json
+│   │   │   └── retry-trend.json
+│   │   ├── index.html
+│   │   ├── plugins
+│   │   │   ├── behaviors
+│   │   │   │   └── index.js
+│   │   │   ├── junit
+│   │   │   ├── packages
+│   │   │   │   └── index.js
+│   │   │   ├── screen-diff
+│   │   │   │   ├── index.js
+│   │   │   │   └── styles.css
+│   │   │   ├── trx
+│   │   │   ├── xctest
+│   │   │   └── xunit-xml
+│   │   ├── styles.css
+│   │   └── widgets
+│   │       ├── behaviors.json
+│   │       ├── categories.json
+│   │       ├── categories-trend.json
+│   │       ├── duration.json
+│   │       ├── duration-trend.json
+│   │       ├── environment.json
+│   │       ├── executors.json
+│   │       ├── history-trend.json
+│   │       ├── launch.json
+│   │       ├── retry-trend.json
+│   │       ├── severity.json
+│   │       ├── status-chart.json
+│   │       ├── suites.json
+│   │       └── summary.json
+│   ├── \347\211\210\346\234\254\345\217\267
+│   │   ├── app.js
+│   │   ├── data
+│   │   │   ├── attachments
+│   │   │   │   └── 36802f280f85cc6e.txt
+│   │   │   ├── behaviors.csv
+│   │   │   ├── behaviors.json
+│   │   │   ├── categories.csv
+│   │   │   ├── categories.json
+│   │   │   ├── packages.json
+│   │   │   ├── suites.csv
+│   │   │   ├── suites.json
+│   │   │   ├── test-cases
+│   │   │   │   └── 9d4689eb0f2e435d.json
+│   │   │   └── timeline.json
+│   │   ├── export
+│   │   │   ├── influxDbData.txt
+│   │   │   ├── mail.html
+│   │   │   └── prometheusData.txt
+│   │   ├── favicon.ico
+│   │   ├── history
+│   │   │   ├── categories-trend.json
+│   │   │   ├── duration-trend.json
+│   │   │   ├── history.json
+│   │   │   ├── history-trend.json
+│   │   │   └── retry-trend.json
+│   │   ├── index.html
+│   │   ├── plugins
+│   │   │   ├── behaviors
+│   │   │   │   └── index.js
+│   │   │   ├── junit
+│   │   │   ├── packages
+│   │   │   │   └── index.js
+│   │   │   ├── screen-diff
+│   │   │   │   ├── index.js
+│   │   │   │   └── styles.css
+│   │   │   ├── trx
+│   │   │   ├── xctest
+│   │   │   └── xunit-xml
+│   │   ├── styles.css
+│   │   └── widgets
+│   │       ├── behaviors.json
+│   │       ├── categories.json
+│   │       ├── categories-trend.json
+│   │       ├── duration.json
+│   │       ├── duration-trend.json
+│   │       ├── environment.json
+│   │       ├── executors.json
+│   │       ├── history-trend.json
+│   │       ├── launch.json
+│   │       ├── retry-trend.json
+│   │       ├── severity.json
+│   │       ├── status-chart.json
+│   │       ├── suites.json
+│   │       └── summary.json
+│   └── \347\211\210\346\234\254\345\217\267_ssh
+│       ├── app.js
+│       ├── data
+│       │   ├── attachments
+│       │   ├── behaviors.csv
+│       │   ├── behaviors.json
+│       │   ├── categories.csv
+│       │   ├── categories.json
+│       │   ├── packages.json
+│       │   ├── suites.csv
+│       │   ├── suites.json
+│       │   ├── test-cases
+│       │   │   ├── 207dd2d357a945d.json
+│       │   │   └── 38083517f690ffb5.json
+│       │   └── timeline.json
+│       ├── export
+│       │   ├── influxDbData.txt
+│       │   ├── mail.html
+│       │   └── prometheusData.txt
+│       ├── favicon.ico
+│       ├── history
+│       │   ├── categories-trend.json
+│       │   ├── duration-trend.json
+│       │   ├── history.json
+│       │   ├── history-trend.json
+│       │   └── retry-trend.json
+│       ├── index.html
+│       ├── plugins
+│       │   ├── behaviors
+│       │   │   └── index.js
+│       │   ├── junit
+│       │   ├── packages
+│       │   │   └── index.js
+│       │   ├── screen-diff
+│       │   │   ├── index.js
+│       │   │   └── styles.css
+│       │   ├── trx
+│       │   ├── xctest
+│       │   └── xunit-xml
+│       ├── styles.css
+│       └── widgets
+│           ├── behaviors.json
+│           ├── categories.json
+│           ├── categories-trend.json
+│           ├── duration.json
+│           ├── duration-trend.json
+│           ├── environment.json
+│           ├── executors.json
+│           ├── history-trend.json
+│           ├── launch.json
+│           ├── retry-trend.json
+│           ├── severity.json
+│           ├── status-chart.json
+│           ├── suites.json
+│           └── summary.json
+├── run.py
+├── watch_report.py
+└── \350\207\252\345\212\250\345\214\226\346\265\213\350\257\225\346\241\206\346\236\266\347\273\223\346\236\204\345\233\276.png
+
+60 directories, 180 files

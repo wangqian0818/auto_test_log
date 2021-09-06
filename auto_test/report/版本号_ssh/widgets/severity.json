@@ -1,0 +1,21 @@
+[ {
+  "uid" : "207dd2d357a945d",
+  "name" : "test_rabbitmq",
+  "time" : {
+    "start" : 1582422240310,
+    "stop" : 1582422240310,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "severity" : "normal"
+}, {
+  "uid" : "38083517f690ffb5",
+  "name" : "test_a1",
+  "time" : {
+    "start" : 1582422233911,
+    "stop" : 1582422239342,
+    "duration" : 5431
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

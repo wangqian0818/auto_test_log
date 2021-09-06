@@ -1,0 +1,33 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "children" : [ {
+    "name" : "Case_ssh.case2.function",
+    "children" : [ {
+      "name" : "test_a1",
+      "uid" : "38083517f690ffb5",
+      "parentUid" : "fbd1ba1e67c634dfab0f9a0c360ee0c5",
+      "status" : "passed",
+      "time" : {
+        "start" : 1582422233911,
+        "stop" : 1582422239342,
+        "duration" : 5431
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_rabbitmq",
+      "uid" : "207dd2d357a945d",
+      "parentUid" : "fbd1ba1e67c634dfab0f9a0c360ee0c5",
+      "status" : "skipped",
+      "time" : {
+        "start" : 1582422240310,
+        "stop" : 1582422240310,
+        "duration" : 0
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "Case_ssh.case2.function"
+  } ],
+  "name" : "packages"
+}

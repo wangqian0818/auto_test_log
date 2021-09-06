@@ -1,0 +1,3 @@
+"Status","Name","Duration in ms","Description"
+"passed","Case_ssh.case2.function.Test_acl#test_a1","5431",""
+"skipped","Case_ssh.case2.function.Test_acl#test_rabbitmq","0",""

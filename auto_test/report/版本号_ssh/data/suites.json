@@ -1,0 +1,41 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "children" : [ {
+    "name" : "Case_ssh.case2",
+    "children" : [ {
+      "name" : "function",
+      "children" : [ {
+        "name" : "Test_acl",
+        "children" : [ {
+          "name" : "test_a1",
+          "uid" : "38083517f690ffb5",
+          "parentUid" : "39cbedf8db3b091405580fcfb70a8d45",
+          "status" : "passed",
+          "time" : {
+            "start" : 1582422233911,
+            "stop" : 1582422239342,
+            "duration" : 5431
+          },
+          "flaky" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "test_rabbitmq",
+          "uid" : "207dd2d357a945d",
+          "parentUid" : "39cbedf8db3b091405580fcfb70a8d45",
+          "status" : "skipped",
+          "time" : {
+            "start" : 1582422240310,
+            "stop" : 1582422240310,
+            "duration" : 0
+          },
+          "flaky" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "39cbedf8db3b091405580fcfb70a8d45"
+      } ],
+      "uid" : "352f72cb952f1fed587b0fe3b0380bec"
+    } ],
+    "uid" : "d07de31523b210b7b1a3761993977713"
+  } ],
+  "name" : "suites"
+}

@@ -1,0 +1,37 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "children" : [ {
+    "name" : "localhost.localdomain",
+    "children" : [ {
+      "name" : "16067-MainThread",
+      "children" : [ {
+        "name" : "test_a1",
+        "uid" : "38083517f690ffb5",
+        "parentUid" : "95d319fc1a0ce1fb7280c382d6f7828b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1582422233911,
+          "stop" : 1582422239342,
+          "duration" : 5431
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_rabbitmq",
+        "uid" : "207dd2d357a945d",
+        "parentUid" : "95d319fc1a0ce1fb7280c382d6f7828b",
+        "status" : "skipped",
+        "time" : {
+          "start" : 1582422240310,
+          "stop" : 1582422240310,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "95d319fc1a0ce1fb7280c382d6f7828b"
+    } ],
+    "uid" : "8c67239ea958cc65c2d8b70742467d82"
+  } ],
+  "name" : "timeline"
+}

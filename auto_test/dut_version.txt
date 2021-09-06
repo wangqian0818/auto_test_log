@@ -1,0 +1,14 @@
+---------------------------- 隔离前置机版本号 ---------------------------
+agentjsac-1.1.906-rc.x86_64
+driverjsac-1.1.897-rc.x86_64
+libhostapi-1.1.897-rc.x86_64
+tsthostapi-1.1.897-rc.x86_64
+nginx-0.0.474-kernel_rc.x86_64
+/usr/local/proxyjsac/jsac_proxy version: 0.0.90-ac14c0e(D:0.0.48-02709c3).
+--------------------------- 隔离后置机版本号 ----------------------------
+agentjsac-1.1.906-rc.x86_64
+driverjsac-1.1.897-rc.x86_64
+libhostapi-1.1.897-rc.x86_64
+tsthostapi-1.1.897-rc.x86_64
+nginx-0.0.474-kernel_rc.x86_64
+/usr/local/proxyjsac/jsac_proxy version: 0.0.90-ac14c0e(D:0.0.48-02709c3).

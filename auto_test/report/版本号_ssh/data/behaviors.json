@@ -1,0 +1,33 @@
+{
+  "uid" : "b1a8273437954620fa374b796ffaacdd",
+  "children" : [ {
+    "name" : "测试1",
+    "children" : [ {
+      "name" : "test_a1",
+      "uid" : "38083517f690ffb5",
+      "parentUid" : "11778285d410190a4e473ab5d6d46486",
+      "status" : "passed",
+      "time" : {
+        "start" : 1582422233911,
+        "stop" : 1582422239342,
+        "duration" : 5431
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "11778285d410190a4e473ab5d6d46486"
+  }, {
+    "name" : "test_rabbitmq",
+    "uid" : "207dd2d357a945d",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "skipped",
+    "time" : {
+      "start" : 1582422240310,
+      "stop" : 1582422240310,
+      "duration" : 0
+    },
+    "flaky" : false,
+    "parameters" : [ ]
+  } ],
+  "name" : "behaviors"
+}

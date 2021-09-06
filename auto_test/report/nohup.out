@@ -1,0 +1,134 @@
+10.10.88.168 - - [23/Feb/2020 10:46:56] "GET /test1.0.0_ssh/ HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:46:56] "GET /test1.0.0_ssh/plugins/screen-diff/index.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:46:56] "GET /test1.0.0_ssh/plugins/screen-diff/styles.css HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:46:56] "GET /test1.0.0_ssh/plugins/packages/index.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:46:56] "GET /test1.0.0_ssh/app.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:00] "GET /test1.0.0_ssh/styles.css HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:09] "GET /test1.0.0_ssh/plugins/behaviors/index.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:16] "GET /test1.0.0_ssh/data/suites.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:34] "GET /test1.0.0_ssh/widgets/summary.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:34] "GET /test1.0.0_ssh/widgets/suites.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:34] "GET /test1.0.0_ssh/widgets/environment.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:34] "GET /test1.0.0_ssh/widgets/behaviors.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:34] "GET /test1.0.0_ssh/widgets/history-trend.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:34] "GET /test1.0.0_ssh/widgets/categories.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:47:34] "GET /test1.0.0_ssh/widgets/executors.json HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:02] "GET /test1.0.0_ssh/ HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:02] "GET /test1.0.0_ssh/plugins/packages/index.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:02] "GET /test1.0.0_ssh/app.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:04] "GET /test1.0.0_ssh/plugins/screen-diff/styles.css HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:04] "GET /test1.0.0_ssh/plugins/behaviors/index.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:04] "GET /test1.0.0_ssh/plugins/screen-diff/index.js HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:04] "GET /test1.0.0_ssh/styles.css HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.10.88.168', 57453)
+Traceback (most recent call last):
+  File "/usr/lib64/python3.6/socketserver.py", line 320, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 351, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python3.6/socketserver.py", line 724, in __init__
+    self.handle()
+  File "/usr/lib64/python3.6/http/server.py", line 418, in handle
+    self.handle_one_request()
+  File "/usr/lib64/python3.6/http/server.py", line 406, in handle_one_request
+    method()
+  File "/usr/lib64/python3.6/http/server.py", line 639, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib64/python3.6/http/server.py", line 800, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib64/python3.6/shutil.py", line 82, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib64/python3.6/socketserver.py", line 803, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+10.10.88.168 - - [23/Feb/2020 10:48:12] "GET /test1.0.0_ssh/ HTTP/1.1" 200 -
+10.10.88.168 - - [23/Feb/2020 10:48:12] "GET /test1.0.0_ssh/styles.css HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.10.88.168', 57457)
+Traceback (most recent call last):
+  File "/usr/lib64/python3.6/socketserver.py", line 320, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 351, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python3.6/socketserver.py", line 724, in __init__
+    self.handle()
+  File "/usr/lib64/python3.6/http/server.py", line 418, in handle
+    self.handle_one_request()
+  File "/usr/lib64/python3.6/http/server.py", line 406, in handle_one_request
+    method()
+  File "/usr/lib64/python3.6/http/server.py", line 639, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib64/python3.6/http/server.py", line 800, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib64/python3.6/shutil.py", line 82, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib64/python3.6/socketserver.py", line 803, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+10.10.88.168 - - [23/Feb/2020 10:48:19] "GET /test1.0.0_ssh/app.js HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.10.88.168', 57454)
+Traceback (most recent call last):
+  File "/usr/lib64/python3.6/socketserver.py", line 320, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 351, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python3.6/socketserver.py", line 724, in __init__
+    self.handle()
+  File "/usr/lib64/python3.6/http/server.py", line 418, in handle
+    self.handle_one_request()
+  File "/usr/lib64/python3.6/http/server.py", line 406, in handle_one_request
+    method()
+  File "/usr/lib64/python3.6/http/server.py", line 639, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib64/python3.6/http/server.py", line 800, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib64/python3.6/shutil.py", line 82, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib64/python3.6/socketserver.py", line 803, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+10.10.88.168 - - [23/Feb/2020 10:48:19] "GET /test1.0.0_ssh/plugins/screen-diff/index.js HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.10.88.168', 57456)
+Traceback (most recent call last):
+  File "/usr/lib64/python3.6/socketserver.py", line 320, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 351, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python3.6/socketserver.py", line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python3.6/socketserver.py", line 724, in __init__
+    self.handle()
+  File "/usr/lib64/python3.6/http/server.py", line 418, in handle
+    self.handle_one_request()
+  File "/usr/lib64/python3.6/http/server.py", line 406, in handle_one_request
+    method()
+  File "/usr/lib64/python3.6/http/server.py", line 636, in do_GET
+    f = self.send_head()
+  File "/usr/lib64/python3.6/http/server.py", line 692, in send_head
+    self.end_headers()
+  File "/usr/lib64/python3.6/http/server.py", line 520, in end_headers
+    self.flush_headers()
+  File "/usr/lib64/python3.6/http/server.py", line 524, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+  File "/usr/lib64/python3.6/socketserver.py", line 803, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+10.10.88.168 - - [23/Feb/2020 10:48:19] "GET /test1.0.0_ssh/plugins/packages/index.js HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.10.88.168', 57459)
+Traceback (most recent call last):
+  File "/usr/lib64/python3.6/socketserver.py", line 320, in _handle_request_noblock
+    self.process_request(request, client_address)

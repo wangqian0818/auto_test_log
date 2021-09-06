@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>测试报告</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (展开详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (隐藏详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+/*
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);*/
+function add_collapse() {  // modify by linux超
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">显示详情</a> / ' +
+                            '<a href="javascript:hide_all_extras()">隐藏详情</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+	// 修改用例报告显示的用例名称 add by linux超
+	var case_name_td = document.getElementsByClassName("col-name");
+		for(var i = 0; i < case_name_td.length; i++)
+			try{
+				case_name_td[i].innerText = case_name_td[i].innerText.split("\[")[1].split("\]")[0];
+			}
+			catch(err){
+				// 如果表格中没有[]会抛异常，如果抛异常我就显示null，如果你想显示别的东西自己改吧，因为通常只要我们使用参数化就有[]显示
+				case_name_td[i].innerText = "测试用例无参数化数据null";
+			}
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>[mail_check_addr]-[10.10.88.47]-[20210903_19-47-48].html</h1>
+    <p>生成报告时间03-Sep-2021 19:50:14 Pytest-Html版本：<a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.22.1.dev11+g4f729c1</p>
+    <h2>测试环境</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.5.0&apos;, &apos;py&apos;: &apos;1.10.0&apos;, &apos;pluggy&apos;: &apos;0.13.1&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.18362-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;allure-pytest&apos;: &apos;2.8.6&apos;, &apos;assume&apos;: &apos;2.4.2&apos;, &apos;base-url&apos;: &apos;1.4.2&apos;, &apos;cov&apos;: &apos;2.10.1&apos;, &apos;forked&apos;: &apos;1.3.0&apos;, &apos;instafail&apos;: &apos;0.4.2&apos;, &apos;metadata&apos;: &apos;1.11.0&apos;, &apos;ordering&apos;: &apos;0.6&apos;, &apos;reportlog&apos;: &apos;0.1.2&apos;, &apos;rerunfailures&apos;: &apos;9.1.1&apos;, &apos;sugar&apos;: &apos;0.9.4&apos;, &apos;xdist&apos;: &apos;2.2.0&apos;, &apos;html&apos;: &apos;1.22.1.dev11+g4f729c1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.6</td></tr>
+      <tr>
+        <td>用例执行时间</td>
+        <td>2021-09-03 19:47:49</td></tr>
+      <tr>
+        <td>设备IP</td>
+        <td>10.10.88.47</td></tr></table>
+    <h2>用例统计</h2>
+    <p>所属部门: 卓讯-合肥测试部</p>
+    <p>测试人员: 王谦</p>
+    <p>【 -------------------------- 网关设备版本号 ----------------------------- 】</p>
+    <p>【 agentjsac-1.1.906-rc.x86_64 】</p>
+    <p>【 driverjsac-1.1.897-rc.x86_64 】</p>
+    <p>【 libhostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 tsthostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 nginx-0.0.474-kernel_rc.x86_64 】</p>
+    <p>执行了2个测试用例, 历时:144.54秒 . </p>
+    <p class="filter" hidden="true">(取消)勾选复选框, 以便筛选测试结果</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">2 通过</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 跳过</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 失败</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 错误</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 预期失败</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 预期通过</span>, <input checked="true" class="filter" data-test-result="重跑" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="重跑">0 重跑</span>
+    <h2>测试结果</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">通过/失败</th>
+          <th class="sortable time" col="time">Time</th>
+          <th>Test_nodeId</th>
+          <th class="sortable numeric" col="duration">耗时</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">无测试结果, 试着选择其他测试结果条件</th></tr></thead>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-time">2021-09-03 11:48:48.589455</td>
+          <td>Case_rbm/mail_check_addr/function.py::Test_mail_check_addr::test_mail_check_addr_a1</td>
+          <td class="col-duration">50.40</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>ssh 连接开始
+ssh连接主机：10.10.88.47  完成!
+ssh服务器: 10.10.88.47连接成功
+export cardid=0&amp;&amp;switch-jsac --set --switch on
+Set successfully.
+
+export cardid=0&amp;&amp;switch-jsac --set --module 12 --switch off
+Set successfully.
+
+export cardid=0&amp;&amp;switch-jsac --set --module 13 --switch off
+Set successfully.
+
+export cardid=0&amp;&amp;switch-jsac --set --module 15 --switch off
+Set successfully.
+
+export cardid=0&amp;&amp;switch-jsac --set --module 16 --switch off
+Set successfully.
+
+export cardid=0&amp;&amp;switch-jsac --set --module 17 --switch off
+Set successfully.
+
+export cardid=0&amp;&amp;defconf  --action forward
+Success.
+
+export cardid=0&amp;&amp;defconf --selabel on
+Success.
+
+export cardid=0&amp;&amp;defconf --cycle 15
+Success.
+
+export cardid=0&amp;&amp;defconf --ipv4aclcycle 30
+Success.
+
+export cardid=0&amp;&amp;defconf --domain off
+Success.
+
+export cardid=0&amp;&amp;defconf --netflow off
+Success.
+
+export cardid=0&amp;&amp;defconf --ipv4acl off
+Success.
+
+export cardid=0&amp;&amp;defconf --syncookie off
+Success.
+
+export cardid=0&amp;&amp;defconf --ckoption off
+Success.
+
+export cardid=0&amp;&amp;defconf --noflow off
+Success.
+
+export cardid=0&amp;&amp;defconf --droperr off
+Success.
+
+export cardid=0&amp;&amp;defconf --tcpmss 0
+Success.
+
+=========================== clear_env 结束 耗时：1.6841249465942383s ==================================
+当前时间为2021-09-03 19:47:51
+第一次获取的结果为：root      15066      1  3 Aug31 ?        02:26:54 /usr/bin/agentjsac -c /etc/jsac/agentjsac.config
+root     322099 321951  0 19:47 ?        00:00:00 bash -c ps -ef |grep agentjsac
+root     322107 322099  0 19:47 ?        00:00:00 grep agentjsac
+
+当前时间为2021-09-03 19:47:52
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:18:51 nginx: master process /usr/local/nginx/sbin/nginx
+root     321654 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321664 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321665 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321666 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321667 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321668 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321671 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321672 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321673 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321674 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321675 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321676 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321677 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321678 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321679 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321680 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321681 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321682 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321683 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321684 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321685 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321686 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321694 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321695 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     322109 321951  0 19:47 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322117 322109  0 19:47 ?        00:00:00 grep nginx
+
+这是进程的第1次等待
+root     214550      1 17 18:02 ?        00:18:51 nginx: master process /usr/local/nginx/sbin/nginx
+root     321654 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321664 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321665 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321666 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321667 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321668 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321671 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321672 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321673 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321674 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321675 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321676 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321677 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321678 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321679 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321680 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321681 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321682 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321683 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321684 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321685 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321686 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321694 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321695 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     322126 321951  0 19:47 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322134 322126  0 19:47 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+=========================== data_check_setup_met 结束 耗时：6.382986545562744s ==================================
+----------------------------- Captured stdout call -----------------------------<br/>Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:47:58
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:18:51 nginx: master process /usr/local/nginx/sbin/nginx
+root     321654 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321664 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321665 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321666 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321667 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321668 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321671 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321672 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321673 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321674 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321675 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321676 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321677 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321678 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321679 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321680 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321681 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321682 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321683 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321684 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321685 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321686 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321694 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321695 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     322135 321951  0 19:47 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322147 322135  0 19:47 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:47:59
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:18:52 nginx: master process /usr/local/nginx/sbin/nginx
+root     321654 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321664 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321665 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321666 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321667 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321668 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321671 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321672 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321673 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321674 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321675 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321676 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321677 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321678 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321679 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321680 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321681 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321682 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321683 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321684 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321685 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321686 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321694 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     321695 214550  0 19:47 ?        00:00:00 nginx: worker process
+root     322152 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322160 322152  0 19:48 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 17 18:02 ?        00:18:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     322171 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322172 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322180 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322181 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322182 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322183 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322184 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322185 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322186 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322194 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322195 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322196 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322197 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322198 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322199 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322200 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322201 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322203 214550  2 19:48 ?        00:00:00 nginx: worker process
+root     322210 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322211 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322212 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322213 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322214 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322215 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322223 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322231 322223  0 19:48 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:48:04
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:18:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     322171 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322172 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322180 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322181 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322182 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322183 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322184 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322185 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322186 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322194 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322195 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322196 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322197 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322198 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322199 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322200 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322201 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322203 214550  2 19:48 ?        00:00:00 nginx: worker process
+root     322210 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322211 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322212 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322213 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322214 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322215 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322239 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322251 322239  0 19:48 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:48:05
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:18:56 nginx: master process /usr/local/nginx/sbin/nginx
+root     322171 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322172 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322180 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322181 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322182 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322183 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322184 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322185 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322186 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322194 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322195 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322196 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322197 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322198 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322199 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322200 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322201 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322203 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322210 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322211 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322212 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322213 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322214 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322215 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322262 214550  0 19:48 ?        00:00:00 [nginx]
+root     322263 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322271 322263  0 19:48 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 17 18:02 ?        00:18:59 nginx: master process /usr/local/nginx/sbin/nginx
+root     322273 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322281 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322282 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322283 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322284 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322285 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322286 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322287 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322288 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322289 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322290 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322291 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322292 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322293 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322294 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322295 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322296 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322297 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322298 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322299 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322300 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322301 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322302 214550  3 19:48 ?        00:00:00 nginx: worker process
+root     322303 214550  3 19:48 ?        00:00:00 nginx: worker process
+root     322304 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322312 322304  0 19:48 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+当前时间为2021-09-03 19:48:10
+第一次获取的结果为：
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+-------self.case1_step1[key][0]:  cat /etc/jsac/protocol.stream
+-------self.case1_step1[key][1]:  10.10.88.47:8885
+-------re1:  
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+当前时间为2021-09-03 19:48:11
+第一次获取的结果为：
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+-------self.case1_step1[key][0]:  cat /etc/jsac/protocol.stream
+-------self.case1_step1[key][1]:  10.10.88.47:8886
+-------re1:  
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+当前时间为2021-09-03 19:48:13
+第一次获取的结果为：tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35008       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35362       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35502       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34242       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34670       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35084       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35268       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34510       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35674       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35036       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35468       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35484       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35558       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35252       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35214       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34868       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34238       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35166       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34958       TIME_WAIT   -                   
+tcp   256595      0 10.10.88.47:17598       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34826       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34950       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34666       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35608       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34322       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34750       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34930       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:b&#x27;34878       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34586       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35830       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35054       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34600       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34410       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34472       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35720       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35104       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35318       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35230       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35430       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35400       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34370       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35656       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35872       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34532       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35440       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35352       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35126       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35150       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35276       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+-------re11:  tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35008       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35362       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35502       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34242       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34670       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35084       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35268       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34510       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35674       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35036       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35468       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35484       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35558       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35252       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35214       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34868       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34238       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35166       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34958       TIME_WAIT   -                   
+tcp   256595      0 10.10.88.47:17598       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34826       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34950       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34666       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35608       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34322       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34750       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34930       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:b&#x27;34878       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34586       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35830       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35054       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34600       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34410       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34472       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35720       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35104       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35318       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35230       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35430       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35400       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34370       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35656       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35872       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34532       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35440       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35352       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35126       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35150       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35276       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+当前时间为2021-09-03 19:48:14
+第一次获取的结果为：tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35008       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35362       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35502       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34242       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34670       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35084       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35268       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34510       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35674       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35036       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35468       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35484       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35558       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35252       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35214       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34868       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34238       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35166       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34958       TIME_WAIT   -                   
+tcp   256595      0 10.10.88.47:17598       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36068       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34826       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34950       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34666       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35608       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34322       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34750       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:b&#x27;34930       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34878       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34586       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35830       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35054       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34600       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34410       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34472       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35720       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35104       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35318       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35230       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35430       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35400       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34370       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35656       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35872       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34532       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35440       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35352       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35126       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35150       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35276       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+-------re11:  tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35008       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35362       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35502       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34242       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34670       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35084       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35268       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34510       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35674       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35036       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35468       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35484       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35558       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35252       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35214       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34868       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34238       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35166       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34958       TIME_WAIT   -                   
+tcp   256595      0 10.10.88.47:17598       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36068       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34826       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34950       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34666       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35608       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34322       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:34750       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:35306       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:b&#x27;34930       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34878       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34586       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35830       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35054       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34600       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34410       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34472       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35720       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35104       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35318       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35230       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35430       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35400       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34370       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35656       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35872       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:34532       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35440       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35352       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35126       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35150       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:35276       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:48:15
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:18:59 nginx: master process /usr/local/nginx/sbin/nginx
+root     322273 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322281 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322282 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322283 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322284 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322285 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322286 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322287 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322288 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322289 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322290 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322291 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322292 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322293 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322294 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322295 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322296 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322297 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322298 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322299 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322300 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322301 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322302 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322303 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322348 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322360 322348  0 19:48 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:48:16
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:19:00 nginx: master process /usr/local/nginx/sbin/nginx
+root     322273 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322281 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322282 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322283 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322284 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322285 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322286 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322287 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322288 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322289 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322290 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322291 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322292 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322293 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322294 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322295 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322296 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322297 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322298 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322299 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322300 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322301 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322302 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322303 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322364 214550  3 19:48 ?        00:00:00 nginx: worker process
+root     322365 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322373 322365  0 19:48 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:03 nginx: master process /usr/local/nginx/sbin/nginx
+root     322364 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322374 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322375 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322376 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322377 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322378 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322379 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322380 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322381 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322384 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322385 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322386 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322387 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322388 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322389 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322390 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322391 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322392 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322393 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322394 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322395 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322396 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322397 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322398 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322420 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322428 322420  0 19:48 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+2
+当前时间为2021-09-03 19:48:21
+第一次获取的结果为：{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;]
+	}
+}
+{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;]
+	}
+}
+当前时间为2021-09-03 19:48:22
+第一次获取的结果为：{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;]
+	}
+}
+{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;]
+	}
+}
+白名单地址liwanqiu66@163.com结果为:1
+非白名单地址jusontest@163.com结果为:0
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:48:26
+第一次获取的结果为：root     214550      1 17 18:02 ?        00:19:03 nginx: master process /usr/local/nginx/sbin/nginx
+root     322364 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322374 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322375 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322376 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322377 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322378 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322379 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322380 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322381 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322384 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322385 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322386 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322387 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322388 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322389 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322390 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322391 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322392 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322393 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322394 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322395 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322396 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322397 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322398 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322472 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322473  15066  0 19:48 ?        00:00:00 sh -c ps -ef | grep /usr/local/nginx/sbin/nginx | grep -qv grep
+root     322477 322473  0 19:48 ?        00:00:00 grep /usr/local/nginx/sbin/nginx
+root     322484 322472  0 19:48 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:48:27
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:03 nginx: master process /usr/local/nginx/sbin/nginx
+root     322364 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322374 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322375 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322376 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322377 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322378 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322379 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322380 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322381 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322384 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322385 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322386 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322387 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322388 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322389 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322390 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322391 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322392 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322393 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322394 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322395 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322396 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322397 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322398 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322496 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322504 322496  0 19:48 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:06 nginx: master process /usr/local/nginx/sbin/nginx
+root     322505 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322507 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322508 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322509 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322510 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322511 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322512 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322513 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322514 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322518 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322519 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322520 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322521 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322522 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322523 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322524 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322525 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322526 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322527 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322528 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322529 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322530 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322531 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322532 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322533 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322541 322533  0 19:48 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:48:32
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:06 nginx: master process /usr/local/nginx/sbin/nginx
+root     322505 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322507 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322508 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322509 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322510 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322511 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322512 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322513 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322514 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322518 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322519 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322520 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322521 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322522 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322523 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322524 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322525 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322526 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322527 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322528 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322529 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322530 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322531 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322532 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322542 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322554 322542  0 19:48 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:48:33
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:07 nginx: master process /usr/local/nginx/sbin/nginx
+root     322505 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322507 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322508 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322509 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322510 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322511 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322512 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322513 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322514 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322518 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322519 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322520 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322521 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322522 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322523 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322524 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322525 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322526 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322527 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322528 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322529 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322530 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322531 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322532 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322558 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322559 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322567 322559  0 19:48 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:10 nginx: master process /usr/local/nginx/sbin/nginx
+root     322558 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322568 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322569 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322570 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322571 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322572 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322573 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322574 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322575 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322576 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322577 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322578 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322579 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322580 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322581 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322582 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322583 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322584 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322585 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322586 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322587 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322588 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322589 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322590 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322593 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322601 322593  0 19:48 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+当前时间为2021-09-03 19:48:39
+第一次获取的结果为：
+
+当前时间为2021-09-03 19:48:40
+第一次获取的结果为：
+
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:48:41
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:10 nginx: master process /usr/local/nginx/sbin/nginx
+root     322558 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322568 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322569 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322570 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322571 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322572 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322573 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322574 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322575 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322576 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322577 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322578 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322579 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322580 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322581 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322582 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322583 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322584 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322585 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322586 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322587 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322588 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322589 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322590 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322630 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322642 322630  0 19:48 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:48:42
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:10 nginx: master process /usr/local/nginx/sbin/nginx
+root     322558 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322568 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322569 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322570 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322571 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322572 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322573 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322574 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322575 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322576 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322577 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322578 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322579 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322580 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322581 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322582 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322583 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322584 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322585 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322586 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322587 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322588 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322589 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322590 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322653 321951  1 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322656 214550  5 19:48 ?        00:00:00 nginx: worker process
+root     322662 322653  0 19:48 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:13 nginx: master process /usr/local/nginx/sbin/nginx
+root     322656 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322663 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322671 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322672 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322673 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322674 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322675 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322676 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322677 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322678 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322686 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322687 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322688 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322689 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322690 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322691 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322692 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322693 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322701 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322702 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322703 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322704 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322705 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322706 214550  1 19:48 ?        00:00:00 nginx: worker process
+root     322723 321951  0 19:48 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322731 322723  0 19:48 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+当前时间为2021-09-03 19:48:47
+第一次获取的结果为：
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-time">2021-09-03 11:49:59.608206</td>
+          <td>Case_rbm/mail_check_addr/function.py::Test_mail_check_addr::test_mail_check_addr_a2</td>
+          <td class="col-duration">51.76</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>当前时间为2021-09-03 19:49:01
+第一次获取的结果为：root      15066      1  3 Aug31 ?        02:26:56 /usr/bin/agentjsac -c /etc/jsac/agentjsac.config
+root     322892 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep agentjsac
+root     322900 322892  0 19:49 ?        00:00:00 grep agentjsac
+
+当前时间为2021-09-03 19:49:02
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:21 nginx: master process /usr/local/nginx/sbin/nginx
+root     322820 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322830 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322831 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322832 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322833 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322834 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322835 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322836 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322837 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322838 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322842 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322843 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322844 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322845 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322846 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322847 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322848 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322849 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322852 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322853 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322854 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322855 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322856 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322857 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322908 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322916 322908  0 19:49 ?        00:00:00 grep nginx
+
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:21 nginx: master process /usr/local/nginx/sbin/nginx
+root     322820 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322830 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322831 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322832 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322833 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322834 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322835 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322836 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322837 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322838 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322842 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322843 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322844 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322845 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322846 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322847 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322848 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322849 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322852 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322853 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322854 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322855 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322856 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322857 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322945 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322953 322945  0 19:49 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+=========================== data_check_setup_met 结束 耗时：6.374849796295166s ==================================
+----------------------------- Captured stdout call -----------------------------<br/>Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:49:07
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:21 nginx: master process /usr/local/nginx/sbin/nginx
+root     322820 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322830 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322831 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322832 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322833 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322834 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322835 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322836 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322837 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322838 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322842 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322843 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322844 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322845 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322846 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322847 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322848 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322849 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322852 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322853 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322854 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322855 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322856 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322857 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322954 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322955  15066  0 19:49 ?        00:00:00 sh -c ps -ef | grep /usr/local/nginx/sbin/nginx | grep -qv grep
+root     322959 322955  0 19:49 ?        00:00:00 grep /usr/local/nginx/sbin/nginx
+root     322966 322954  0 19:49 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:49:08
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:21 nginx: master process /usr/local/nginx/sbin/nginx
+root     322820 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322830 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322831 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322832 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322833 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322834 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322835 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322836 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322837 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322838 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322842 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322843 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322844 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322845 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322846 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322847 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322848 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322849 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322852 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322853 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322854 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322855 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322856 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322857 214550  0 19:48 ?        00:00:00 nginx: worker process
+root     322970 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     322978 322970  0 19:49 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:25 nginx: master process /usr/local/nginx/sbin/nginx
+root     322981 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322982 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322983 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322984 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322986 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322987 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322988 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322989 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322990 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322991 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322992 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322993 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322994 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322995 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322996 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322997 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322998 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322999 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323000 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323001 214550  3 19:49 ?        00:00:00 nginx: worker process
+root     323002 214550  3 19:49 ?        00:00:00 nginx: worker process
+root     323003 214550  3 19:49 ?        00:00:00 nginx: worker process
+root     323004 214550  3 19:49 ?        00:00:00 nginx: worker process
+root     323005 214550  3 19:49 ?        00:00:00 nginx: worker process
+root     323009 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323017 323009  0 19:49 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:49:14
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:25 nginx: master process /usr/local/nginx/sbin/nginx
+root     322981 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322982 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322983 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322984 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322986 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322987 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322988 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322989 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322990 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322991 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322992 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322993 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322994 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322995 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322996 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322997 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322998 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     322999 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323000 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323001 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323002 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323003 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323004 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323005 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323018 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323019  15066  0 19:49 ?        00:00:00 sh -c ps -ef | grep /usr/local/nginx/sbin/nginx | grep -qv grep
+root     323023 323019  0 19:49 ?        00:00:00 grep /usr/local/nginx/sbin/nginx
+root     323030 323018  0 19:49 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:49:15
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:25 nginx: master process /usr/local/nginx/sbin/nginx
+root     322981 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322982 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322983 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322984 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322986 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322987 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322988 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322989 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322990 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322991 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322992 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322993 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322994 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322995 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322996 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322997 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322998 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     322999 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323000 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323001 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323002 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323003 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323004 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323005 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323035 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323043 323035  0 19:49 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:29 nginx: master process /usr/local/nginx/sbin/nginx
+root     323045 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323046 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323047 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323048 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323049 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323050 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323051 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323052 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323053 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323054 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323055 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323058 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323059 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323060 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323061 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323062 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323063 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323064 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323065 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323066 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323067 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323068 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323069 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323070 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323085 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323093 323085  0 19:49 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+当前时间为2021-09-03 19:49:20
+第一次获取的结果为：
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+当前时间为2021-09-03 19:49:21
+第一次获取的结果为：
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+
+upstream 10.10.88.47-8885-smtp {
+	server 220.181.12.11:25;
+}
+server {
+	listen 10.10.88.47:8885;
+	proxy_pass 10.10.88.47-8885-smtp;
+	# keyword_filtering off;
+	proxy_service smtp;
+}
+upstream 10.10.88.47-8886-pop3 {
+	server 220.181.12.110:110;
+}
+server {
+	listen 10.10.88.47:8886;
+	proxy_pass 10.10.88.47-8886-pop3;
+	# keyword_filtering off;
+	proxy_service pop3;
+}
+
+当前时间为2021-09-03 19:49:22
+第一次获取的结果为：tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38478       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37638       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37600       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37692       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36850       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36648       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37496       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38416       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37810       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37266       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37650       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37878       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37002       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37710       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37418       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37568       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37446       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37162       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36736       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38094       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37964       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37216       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36910       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37948       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37790       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37604       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37772       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36780       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37248       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38194       TIME_WAIT   -                   
+tcp   256669      0 10.10.88.47:17598       10.10.88.32:b&#x27;5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36812       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37738       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38340       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37360       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37060       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36952       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:48280       220.181.12.11:25        TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:8885        10.10.100.136:19514     TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37326       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37380       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37458       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37334       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38122       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38012       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36680       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37146       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37240       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36876       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37762       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36488       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37550       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36582       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37108       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37532       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38478       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37638       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37600       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37692       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36850       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36648       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37496       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38416       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37810       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37266       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37650       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37878       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37002       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37710       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37418       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37568       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37446       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37162       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36736       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38094       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37964       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37216       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36910       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37948       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37790       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37604       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37772       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36780       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37248       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38194       TIME_WAIT   -                   
+tcp   256669      0 10.10.88.47:17598       10.10.88.32:b&#x27;5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36812       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37738       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38340       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37360       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37060       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36952       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:48280       220.181.12.11:25        TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:8885        10.10.100.136:19514     TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37326       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37380       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37458       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37334       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38122       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38012       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36680       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37146       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37240       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36876       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37762       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36488       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37550       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36582       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37108       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37532       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+当前时间为2021-09-03 19:49:23
+第一次获取的结果为：tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38478       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37638       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37600       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37692       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36850       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36648       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37496       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38416       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37810       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37266       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37650       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37878       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37002       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37710       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37418       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37568       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37446       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37162       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36736       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38094       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37964       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37216       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36910       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37948       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37790       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37604       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37772       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36780       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37248       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38194       TIME_WAIT   -                   
+tcp   256669      0 10.10.88.47:17598       10.10.88.32:b&#x27;5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36812       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37738       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38340       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37360       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37060       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36952       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:48280       220.181.12.11:25        TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:8885        10.10.100.136:19514     TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37326       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37380       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37458       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37334       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38122       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38012       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36680       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37146       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37240       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36876       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37762       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36488       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37550       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36582       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37108       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37532       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+tcp        0      0 10.10.88.47:8885        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 10.10.88.47:8886        0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12536/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      214550/nginx: maste 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13017/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12506/zabbix_agentd 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38478       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37638       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37600       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37692       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36850       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36648       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37496       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38416       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37886       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37810       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37266       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37650       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37878       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37002       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37710       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37418       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36590       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37568       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37446       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:22          10.10.100.136:27585     ESTABLISHED 435427/sshd: root@p 
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37162       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36736       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38094       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37964       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37216       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36910       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37948       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37790       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37604       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37772       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:36780       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:37248       TIME_WAIT   -                   
+tcp        0      0 10.10.88.47:10050       10.10.88.22:38194       TIME_WAIT   -                   
+tcp   256669      0 10.10.88.47:17598       10.10.88.32:b&#x27;5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36812       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37738       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:17596       10.10.88.32:5671        ESTABLISHED 15066/agentjsac     \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38340       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37360       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37060       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36952       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:48280       220.181.12.11:25        TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:8885        10.10.100.136:19514     TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37326       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36520       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37380       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37458       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37334       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38122       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:38012       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36680       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37146       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:22          10.10.100.136:9734      ESTABLISHED 321951/sshd: root@n \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37240       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36876       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37762       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36488       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37550       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:36582       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37780       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37108       TIME_WAIT   -                   \ntcp        0      0 10.10.88.47:10050       10.10.88.22:37532       TIME_WAIT   -                   \ntcp6       0      0 :::20022                :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 :::22                   :::*                    LISTEN      12536/sshd: /usr/sb \ntcp6       0      0 ::1:25                  :::*                    LISTEN      13017/master        \ntcp6       0      0 :::10050                :::*                    LISTEN      12506/zabbix_agentd \n&#x27;
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:49:24
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:29 nginx: master process /usr/local/nginx/sbin/nginx
+root     323045 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323046 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323047 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323048 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323049 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323050 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323051 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323052 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323053 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323054 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323055 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323058 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323059 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323060 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323061 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323062 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323063 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323064 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323065 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323066 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323067 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323068 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323069 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323070 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323154 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323166 323154  0 19:49 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:49:25
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:30 nginx: master process /usr/local/nginx/sbin/nginx
+root     323045 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323046 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323047 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323048 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323049 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323050 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323051 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323052 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323053 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323054 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323055 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323058 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323059 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323060 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323061 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323062 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323063 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323064 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323065 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323066 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323067 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323068 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323069 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323070 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323177 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323182 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323186 323177  0 19:49 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:33 nginx: master process /usr/local/nginx/sbin/nginx
+root     323182 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323187 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323188 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323189 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323190 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323198 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323199 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323200 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323201 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323202 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323203 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323204 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323205 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323206 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323207 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323208 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323209 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323210 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323211 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323212 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323213 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323214 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323215 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323216 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323221 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323229 323221  0 19:49 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+当前时间为2021-09-03 19:49:31
+第一次获取的结果为：{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;, &quot;m53667987@163.com&quot;]
+	}
+}
+{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;, &quot;m53667987@163.com&quot;]
+	}
+}
+当前时间为2021-09-03 19:49:32
+第一次获取的结果为：{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;, &quot;m53667987@163.com&quot;]
+	}
+}
+{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;, &quot;m53667987@163.com&quot;]
+	}
+}
+当前时间为2021-09-03 19:49:33
+第一次获取的结果为：{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;, &quot;m53667987@163.com&quot;]
+	}
+}
+{
+	&quot;mail&quot;:	{
+		&quot;allow-from&quot;:	[&quot;liwanqiu66@163.com&quot;, &quot;m53667987@163.com&quot;]
+	}
+}
+白名单地址liwanqiu66@163.com结果为:1
+*cmd* &#x27;USER m53667987@163.com&#x27;
+*cmd* &#x27;PASS QLOMYDIDADJMOQET&#x27;
+*cmd* &#x27;STAT&#x27;
+*stat* [b&#x27;+OK&#x27;, b&#x27;496&#x27;, b&#x27;3821890&#x27;]
+*cmd* &#x27;LIST&#x27;
+*cmd* &#x27;RETR 496&#x27;
+*cmd* &#x27;QUIT&#x27;
+From:  &lt;liwanqiu66@163.com&gt;
+To:  &lt;m53667987@163.com&gt;
+Cc:  &lt;liwanqiu66@163.com&gt;
+Subject: 关于mail_check_addr
+part 0
+--------------------
+  Text: 测试内容-content...
+白名单接收者m53667987@163.com成功接收邮件
+非白名单地址jusontest@163.com结果为:0
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:49:37
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:33 nginx: master process /usr/local/nginx/sbin/nginx
+root     323182 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323187 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323188 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323189 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323190 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323198 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323199 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323200 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323201 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323202 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323203 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323204 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323205 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323206 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323207 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323208 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323209 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323210 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323211 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323212 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323213 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323214 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323215 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323216 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323251 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323252  15066  0 19:49 ?        00:00:00 sh -c ps -ef | grep /usr/local/nginx/sbin/nginx | grep -qv grep
+root     323258 323252  0 19:49 ?        00:00:00 grep /usr/local/nginx/sbin/nginx
+root     323263 323251  0 19:49 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:49:38
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:33 nginx: master process /usr/local/nginx/sbin/nginx
+root     323182 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323187 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323188 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323189 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323190 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323198 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323199 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323200 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323201 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323202 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323203 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323204 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323205 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323206 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323207 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323208 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323209 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323210 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323211 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323212 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323213 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323214 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323215 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323216 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323269 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323277 323269  0 19:49 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:36 nginx: master process /usr/local/nginx/sbin/nginx
+root     323278 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323279 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323280 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323281 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323282 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323283 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323284 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323292 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323293 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323294 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323295 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323296 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323297 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323298 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323299 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323307 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323308 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323309 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323310 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323311 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323312 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323313 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323314 214550  2 19:49 ?        00:00:00 nginx: worker process
+root     323322 214550  2 19:49 ?        00:00:00 nginx: worker process
+root     323337 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323345 323337  0 19:49 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:49:43
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:36 nginx: master process /usr/local/nginx/sbin/nginx
+root     323278 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323279 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323280 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323281 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323282 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323283 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323284 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323292 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323293 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323294 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323295 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323296 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323297 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323298 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323299 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323307 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323308 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323309 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323310 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323311 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323312 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323313 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323314 214550  2 19:49 ?        00:00:00 nginx: worker process
+root     323322 214550  2 19:49 ?        00:00:00 nginx: worker process
+root     323346 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323347  15066  0 19:49 ?        00:00:00 sh -c ps -ef | grep /usr/local/nginx/sbin/nginx | grep -qv grep
+root     323351 323347  0 19:49 ?        00:00:00 grep /usr/local/nginx/sbin/nginx
+root     323358 323346  0 19:49 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:49:44
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:37 nginx: master process /usr/local/nginx/sbin/nginx
+root     323278 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323279 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323280 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323281 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323282 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323283 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323284 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323292 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323293 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323294 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323295 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323296 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323297 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323298 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323299 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323307 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323308 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323309 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323310 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323311 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323312 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323313 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323314 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323322 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323369 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323370 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323378 323370  0 19:49 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:40 nginx: master process /usr/local/nginx/sbin/nginx
+root     323369 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323379 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323380 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323381 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323382 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323383 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323384 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323393 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323394 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323395 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323396 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323397 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323398 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323399 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323400 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323409 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323410 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323411 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323412 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323413 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323414 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323415 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323416 214550  2 19:49 ?        00:00:00 nginx: worker process
+root     323418 214550  2 19:49 ?        00:00:00 nginx: worker process
+root     323421 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323429 323421  0 19:49 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+当前时间为2021-09-03 19:49:50
+第一次获取的结果为：
+
+当前时间为2021-09-03 19:49:51
+第一次获取的结果为：
+
+Rabbitmq服务器连接: 10.10.88.32:5671 成功.
+向Rabbitmq发送信息成功!
+Domain值为: hf.f1203.g01.xn_17.gw47的Rabbitmq信息接收线程已开启!
+当前时间为2021-09-03 19:49:52
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:40 nginx: master process /usr/local/nginx/sbin/nginx
+root     323369 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323379 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323380 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323381 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323382 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323383 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323384 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323393 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323394 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323395 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323396 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323397 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323398 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323399 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323400 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323409 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323410 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323411 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323412 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323413 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323414 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323415 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323416 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323418 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323446 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323458 323446  0 19:49 ?        00:00:00 grep nginx
+
+当前时间为2021-09-03 19:49:53
+第一次获取的结果为：root     214550      1 18 18:02 ?        00:19:40 nginx: master process /usr/local/nginx/sbin/nginx
+root     323369 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323379 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323380 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323381 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323382 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323383 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323384 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323393 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323394 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323395 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323396 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323397 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323398 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323399 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323400 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323409 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323410 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323411 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323412 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323413 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323414 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323415 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323416 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323418 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323463 321951  1 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323471 323463  0 19:49 ?        00:00:00 grep nginx
+
+Domain值为: hf.f1203.g01.xn_17.gw47 的Rabbitmq信息接收管道关闭成功!
+这是进程的第1次等待
+root     214550      1 18 18:02 ?        00:19:44 nginx: master process /usr/local/nginx/sbin/nginx
+root     323472 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323473 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323474 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323475 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323477 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323478 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323479 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323480 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323481 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323482 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323483 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323484 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323485 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323486 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323487 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323488 214550  0 19:49 ?        00:00:00 nginx: worker process
+root     323490 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323491 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323492 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323493 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323494 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323495 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323496 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323497 214550  1 19:49 ?        00:00:00 nginx: worker process
+root     323502 321951  0 19:49 ?        00:00:00 bash -c ps -ef |grep nginx
+root     323510 323502  0 19:49 ?        00:00:00 grep nginx
+
+当前有24个进程启动成功
+24个进程全部启动成功
+当前时间为2021-09-03 19:49:58
+第一次获取的结果为：
+</div></td></tr></tbody></table></body></html>

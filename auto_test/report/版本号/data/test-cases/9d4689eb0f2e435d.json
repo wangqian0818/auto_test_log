@@ -1,0 +1,71 @@
+{
+  "uid" : "9d4689eb0f2e435d",
+  "name" : "test_a1",
+  "fullName" : "Case.case2.index#test_a1",
+  "historyId" : "9256f220ae191857c4f79cf7f56ae143",
+  "time" : {
+    "start" : 1581948850208,
+    "stop" : 1581948851499,
+    "duration" : 1291
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "36802f280f85cc6e",
+      "name" : "stdout",
+      "source" : "36802f280f85cc6e.txt",
+      "type" : "text/plain",
+      "size" : 474
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "测试1"
+  }, {
+    "name" : "parentSuite",
+    "value" : "Case.case2"
+  }, {
+    "name" : "suite",
+    "value" : "index"
+  }, {
+    "name" : "host",
+    "value" : "localhost.localdomain"
+  }, {
+    "name" : "thread",
+    "value" : "22655-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "Case.case2.index"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "9d4689eb0f2e435d.json",
+  "parameterValues" : [ ]
+}
