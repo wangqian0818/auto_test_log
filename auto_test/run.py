@@ -13,6 +13,7 @@ Environment: 标注环境Environment字段
 
 import time
 
+# from common import baseinfo
 from common import fun
 
 try:
@@ -22,7 +23,8 @@ except Exception as err:
 	第三方库导入失败!
 	如果提示pytest库不存在,请执行:sudo pip3 install pytest 安装pytest库
 	如果提示allure库不存在,请执行:sudo pip3 install allure-pytest 安装allure库
-	错误信息如下:'''
+	错误信息如下:
+	'''
     print(msg)
     print(err)
     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
@@ -54,14 +56,46 @@ def main():
             print('mode_list: ', mode_list)
             print(version)
             print('=======================================')
+        # print(clientIp)
         except Exception as err:
             print('版本号获取失败!请检查是否设置了版本号.错误信息如下:')
             print(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
+        else:
+            # 验证并创建log保存目录
+            current_time = time.strftime('%Y%m%d_%H-%M-%S', time.localtime(time.time()))
+            if not os.path.exists(base_path + '/Logs/' + str(version) + '/' + current_time):  # 如果保存当前版本的logs目录不存在,就创建
+                try:
+                    os.makedirs(base_path + '/Logs/' + str(version) + '/' + current_time)
+                except Exception as err:
+                    print('保存当前版本的Logs目录创建失败!请检查文件夹是否有操作权限.\n错误信息如下:')
+                    print(err)
+                    sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
+            else:  # 如果logs目录已存在
+                msg = '''
+				当前版本测试例的Logs目录已存在,继续运行将删除已存在的Logs文件
+				是否继续运行?继续运行请输入y
+				输入其他任何字符都将直接结束程序运行
+				'''
+                msg = input(msg)
+                msg = msg.strip()
+                if msg.lower() == 'y':
+                    try:
+                        shutil.rmtree(base_path + '/Logs/' + str(version) + '/' + current_time)  # 删除当前logs目录
+                        os.makedirs(base_path + '/Logs/' + str(version) + '/' + current_time)
+                    except Exception as err:
+                        print('保存当前版本的Logs目录创建失败!请检查文件夹是否有操作权限.\n错误信息如下:')
+                        print(err)
+                        sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
+                else:
+                    print('已选择结束程序运行!如需查看已存在的Logs文件,请进入: ' + base_path + '/Logs/' + str(version) + ' 目录查看对应的Log文件')
+                    sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
     for mode in mode_list:
+
         try:
             with open(base_path + '/common/caseselect_' + str(mode) + '.py', 'r', encoding='utf-8') as f:  # 读取选取的单元测试例
                 case = json.loads(f.read())
+
         except Exception as err:
             print(
                 '读取单元测试例文件失败!请检查文件: ' + str(base_path + '/common/caseselect_' + str(mode) + '.py') + ' 是否存在.\n错误信息如下:')
@@ -69,14 +103,19 @@ def main():
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
 
         if not isinstance(case, dict):  # 判断单元测试例选择文件是否是字典形式,是的话就继续执行
-            msg = '''被选择的单元测试例的文件格式为:\n{"case1":['Story1','Story2'],"case2":['Story2','Story3']}'''
+            msg = '''
+            被选择的单元测试例的文件格式为:
+            {"case1":['Story1','Story2'],"case2":['Story2','Story3']}
+            '''
             print(msg + '\n		单元测试例选择文件位于: ' + base_path + '/common/caseselect_' + str(mode) + '.py')
+
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         else:
             try:
                 case_name = case.keys()  # 获取所有的单元测试例文件目录
+                # print(mode + '__' + case_name)
                 print('【', mode, '】')
-                # print(case_name)
+                print(case_name)
                 for i in case_name:  # 判断所选择的单元测试例目录是否真实存在,如果不存在就直接报错,结束程序运行
                     print('--------------', i)
                 print('=======================================')
@@ -86,123 +125,69 @@ def main():
                         mode) + '.py')
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
 
+    result_file = base_path + r'/Logs/' + str(version) + '/result_temp.txt'
+    # 清空文件： result_temp.txt
+    with open(result_file, 'w') as f1:
+        f1.seek(0)
+        f1.truncate()
+    for mode in mode_list:
+        with open(base_path + '/common/caseselect_' + str(mode) + '.py', 'r', encoding='utf-8') as f:  # 读取选取的单元测试例
+            case = json.loads(f.read())
+        case_name = case.keys()  # 获取所有的单元测试例文件目录
         case_list = ''  # 定义单元测试例文件夹保存变量
         for i in case_name:  # 判断所选择的单元测试例目录是否真实存在,如果不存在就直接报错,结束程序运行
             # print('--------------', i)
             if os.path.exists(base_path + '/Case_' + str(mode) + '/' + str(i) + '/function.py'):
                 case_list = case_list + base_path + '/Case_' + str(mode) + '/' + str(i) + '/function.py' + ' '
+            # if isinstance(case[i],list):#判断单元测试例的Story(执行哪个测试函数)选择是否存在.只有判断了这一步,才能执行下一步
+            #	if len(case[i])>0:#存在Story选择
+            #		for j in case[i]:
+            #			case_list=case_list+' --allure_stories='+str(j)+' '
             else:
                 print('单元测试例目录: ' + str(i) + ' 不存在!请检查后重试.')
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
+        try:
+            list = str(case_list).strip().split(" ")
+            left = '['
+            right = ']'
+            mid = '-'
+            log_name = mid + left + info.gwManageIp + right + mid + left
+            for i in list:
+                c = i.split("/")[-2]
+                # 获取当前设备的组件版本号，并写入到文件 dut_version.txt
+                fun.get_dut_version(c)
+                log = left + c + right + log_name + time.strftime('%Y%m%d_%H-%M-%S',
+                                                                  time.localtime(time.time())) + right
+                file = open(result_file, 'a+')
+                file.write("\n--------------------- 开始执行 case：%s" % i)
+                file.flush()
 
-    cirStr = input("请输入循环次数（非零正整数）：")
-    try:
-        cirNum = int(cirStr)
-        if not isinstance(cirNum, int) or 0 >= cirNum:
-            print("程序友好退出，请输入整数。")
-            sys.exit(0)
-    except Exception as err:
-        print("程序友好退出，请输入整数({})".format(err))
-        sys.exit(0)
-    print('循环{}次'.format(cirNum))
-    log_dirs = []  # 此次循环产生的日志路径
-    exist_faileds = []  # 存在failed的case文件夹名称
-    for num in range(cirNum):
-        print('================================== 开始第{}次循环 =================================='.format(num + 1))
-        # 验证并创建log保存目录
-        current_time = time.strftime('%Y%m%d_%H-%M-%S', time.localtime(time.time()))
-        if not os.path.exists(base_path + '/Logs/' + str(version) + '/' + current_time):  # 如果保存当前版本的logs目录不存在,就创建
-            try:
-                os.makedirs(base_path + '/Logs/' + str(version) + '/' + current_time)
-            except Exception as err:
-                print('保存当前版本的Logs目录创建失败!请检查文件夹是否有操作权限.\n错误信息如下:')
-                print(err)
-                sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
-        else:  # 如果logs目录已存在
-            msg = '''当前版本测试例的Logs目录已存在,继续运行将删除已存在的Logs文件\n是否继续运行?继续运行请输入y\n输入其他任何字符都将直接结束程序运行'''
-            msg = input(msg)
-            msg = msg.strip()
-            if msg.lower() == 'y':
-                try:
-                    shutil.rmtree(base_path + '/Logs/' + str(version) + '/' + current_time)  # 删除当前logs目录
-                    os.makedirs(base_path + '/Logs/' + str(version) + '/' + current_time)
-                except Exception as err:
-                    print('保存当前版本的Logs目录创建失败!请检查文件夹是否有操作权限.\n错误信息如下:')
-                    print(err)
-                    sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
-            else:
-                print('已选择结束程序运行!如需查看已存在的Logs文件,请进入: ' + base_path + '/Logs/' + str(version) + ' 目录查看对应的Log文件')
-                sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
-        result_file = base_path + '/Logs/' + str(version) + '/result_temp.txt'
-        # 清空文件： result_temp.txt
-        with open(result_file, 'w') as f1:
-            f1.seek(0)
-            f1.truncate()
-        for mode in mode_list:
-            with open(base_path + '/common/caseselect_' + str(mode) + '.py', 'r', encoding='utf-8') as f:  # 读取选取的单元测试例
-                case = json.loads(f.read())
-                case_name = case.keys()
-            case_list = ''  # 定义单元测试例文件夹保存变量
-            for i in case_name:  # 判断所选择的单元测试例目录是否真实存在,如果不存在就直接报错,结束程序运行
-                # print('--------------', i)
-                if os.path.exists(base_path + '/Case_' + str(mode) + '/' + str(i) + '/function.py'):
-                    case_list = case_list + base_path + '/Case_' + str(mode) + '/' + str(i) + '/function.py' + ' '
-            try:
-                try:
-                    case_list = str(case_list).strip().split(" ")
-                    left = '['
-                    right = ']'
-                    mid = '-'
-                    log_name = mid + left + info.gwManageIp + right + mid + left
+                abs_path = os.path.dirname(os.path.abspath(__file__))
+                # print('abs_path: ', abs_path)
+                # 执行pytest测试,输出到控制台
+                os.system('pytest ' + i + ' -s --html=' + abs_path + '/Logs/' + str(
+                    version) + '/' + current_time + '/' + mode + '/' + log + '.html --self-contained-html')
 
-                    for i in case_list:
-                        file = open(result_file, 'a+')
-                        file.write("\n--------------------- 开始执行 case：%s" % i)
-                        file.flush()
-                        c = i.split("/")[-2]
-                        # 获取当前设备的组件版本号，并写入到文件 dut_version.txt
-                        fun.get_dut_version(c)
-                        log = left + c + right + log_name + time.strftime('%Y%m%d_%H-%M-%S',
-                                                                          time.localtime(time.time())) + right
-                        abs_path = os.path.dirname(os.path.abspath(__file__))
-                        # print('abs_path: ', abs_path)
-                        os.system('pytest ' + i + ' --html=' + abs_path + '/Logs/' + str(
-                            version) + '/' + current_time + '/' + mode + '/' + log + '.html --self-contained-html')
-                        file.write("\n--------------------- 执行结束 case：%s\n\n\n" % i)
-                        file.flush()
+                file.write("\n--------------------- 执行结束 case：%s\n\n\n" % i)
+                file.flush()
+                file.close()
 
-                        # 读取执行结果文件，更改文件名
-                        result = get_result(result_file, i)
-                        log_dir = abs_path + '\\Logs\\' + str(version) + '\\' + current_time + '\\' + mode + '\\'
-                        src_log = log_dir + log + '.html'
-                        des_log = log_dir + log + result + '.html'
-                        os.rename(src_log, des_log)
-                        log_dirs.append(log_dir)
-                        if 'failed' in result or 'error' in result:
-                            exist_faileds.append(current_time)
-                        exist_faileds = list(set(exist_faileds))
+                # 读取执行结果文件，更改文件名
+                result = get_result(result_file, i)
+                log_dir = abs_path + '\\Logs\\' + str(version) + '\\' + current_time + '\\' + mode + '\\'
+                src_log = log_dir + log + '.html'
+                des_log = log_dir + log + result + '.html'
+                os.rename(src_log, des_log)
 
-                    print('###################################################')
-                except Exception as err1:
-                    print('执行Pytest测试失败!错误信息如下:')
-                    print(err1)
-                    sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
-            except Exception as error:
-                print('pytest测试调用失败!错误内容如下:')
-                print(error)
-                sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
-
-    print('自动化测试完成！')
-    if 0 != len(log_dirs):
-        # print("日志路径为：", log_dirs)
-        if 0 == len(exist_faileds):
-            print('========================== 恭喜，此次循环执行用例{}次，全部成功！！！棒棒~'.format(cirNum))
-        else:
-            print('========================== 此次循环执行用例{}次，存在失败用例的log文件夹如下: \n{}'.format(cirNum, exist_faileds))
-        return log_dirs
+            print('#################')
+        except Exception as err:
+            print('执行Pytest测试失败!错误信息如下:')
+            print(err)
+            sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
     else:
-        print("========================== 日志路径不存在，测试报告尚未生成 ========================== ")
-        return None
+        print('自动化测试完成！')
+        print('log_dir: ', log_dir)
+        return log_dir
 
 
 # 读取执行结果文件，将执行结果追加到日志文件名
@@ -236,7 +221,7 @@ def get_result(result_file, case_path):
     #         fail_num += 1
     # result = '-[pass-%d_skip-%d_fail-%d]' % (pass_num, skip_num, fail_num)
 
-    # 按照用例执行顺序来列出pass,skip,fail
+    # 按照用例执行顺序来列出pass，skip,fail
     re = '-['
     for i in range(len(result_list)):
         if 'passed' in result_list[i]:

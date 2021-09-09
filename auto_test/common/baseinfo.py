@@ -10,7 +10,7 @@ mode：代表的是执行ssh类型的链接还是其他的，例如：rabbitmq�
 同时，需要在common目录下建议caseselect_ssh.py文件，对Case_ssh目录中的单元测试例文件夹进行选择
 其中的ssh是一一对应的'rbm', 'ssh'
 '''
-mode_list = ['rbm', 'ssh']  # 要测试的类型
+mode_list = ['rbm']  # 要测试的类型
 strip = '[]\n'
 qos_port = '8888'
 
