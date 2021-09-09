@@ -4,12 +4,7 @@ class Test_case_01():
 
     def test_01(self):
         while True:
-            print("Test_case_01：用例内容")
-        # try:
-        #     while True:
-        #         print("Test_case_01：用例内容")
-        # except Exception as err:
-        #     print('报错啦：', err)
+            print("Test_case_02：用例内容")
 
     # # @pytest.mark.skip(reseason="skip")
     # def test_02(self):
