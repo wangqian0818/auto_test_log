@@ -28,7 +28,7 @@ result_file = base_path + '/Logs/' + str(version) + '/result_temp.txt'
 
 def pytest_runtest_protocol(item, nextitem):
     # f = open('./result_temp.txt', 'a+')
-    # # old = sys.stdout  # 将当前系统输出储存到临时变量
+    # old = sys.stdout  # 将当前系统输出储存到临时变量
     # sys.stdout = f  # 输出重定向到文件
     # f.close()
     reports = runtestprotocol(item, nextitem=nextitem)
@@ -50,11 +50,10 @@ def pytest_runtest_protocol(item, nextitem):
             num += 1
     # print("num: ",num)
     # 将用例执行结果写入到 result_temp.txt 文件中
-    # file = open('./result_temp.txt', 'a+')
     file = open(result_file, 'a+')
     startStr = "\n start----------------------------------------------------------------------------------------------------"
     # file.write(startStr)
-    print(startStr)
+    # print(startStr)
     str = ''
     if num == 3:
         str = '\nresult: %s -- %s' % (item.name, report.outcome)
@@ -72,7 +71,7 @@ def pytest_runtest_protocol(item, nextitem):
     file.flush()
     endStr = "\n end----------------------------------------------------------------------------------------------------"
     # file.write(endStr)
-    print(endStr)
+    # print(endStr)
     return True
 
 

@@ -4,9 +4,12 @@
 # 连接设备之后必须要有数据传输，否则关闭会有问题
 import select
 import sys
-
 import paramiko
 
+import logging
+logger = paramiko.util.logging.getLogger()
+logger.setLevel(logging.WARNING)
+# paramiko.util.log_to_file('paramiko.log')
 
 class ssh:
 

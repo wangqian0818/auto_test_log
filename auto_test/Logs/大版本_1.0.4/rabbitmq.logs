@@ -1,0 +1,60 @@
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "AddAgent", "MessageTime": "2021-10-09 15:15:05", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'AddAgent', 'MessageTime': '2021-10-09 15:15:07', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'true'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "SetHttpCheck", "MessageTime": "2021-10-09 15:15:13", "Sender": "Centre0", "Content": [{"Type": "content", "DataCheck": [{"method": "get", "DataType": "re", "Data": "123"}]}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'SetHttpCheck', 'MessageTime': '2021-10-09 15:15:14', 'Content': [{'Type': 'content', 'DataCheck': [{'method': 'get', 'DataType': 're', 'Data': '123'}]}], 'Success': 'true', 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DelAgent", "MessageTime": "2021-10-09 15:15:21", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DelAgent', 'MessageTime': '2021-10-09 15:15:23', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'true'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DropHttpCheck", "MessageTime": "2021-10-09 15:15:29", "Sender": "Centre0", "Content": []}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DropHttpCheck', 'MessageTime': '2021-10-09 15:15:30', 'Content': [], 'Success': 'true', 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DelAgent", "MessageTime": "2021-10-09 15:15:36", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DelAgent', 'MessageTime': '2021-10-09 15:15:37', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'false', 'ErrCode': '50', 'ErrMsg': 'The Agent does not exist'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "AddAgent", "MessageTime": "2021-10-09 15:33:35", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'AddAgent', 'MessageTime': '2021-10-09 15:33:37', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'true'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "SetHttpCheck", "MessageTime": "2021-10-09 15:33:42", "Sender": "Centre0", "Content": [{"Type": "content", "DataCheck": [{"method": "get", "DataType": "re", "Data": "123"}]}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'SetHttpCheck', 'MessageTime': '2021-10-09 15:33:44', 'Content': [{'Type': 'content', 'DataCheck': [{'method': 'get', 'DataType': 're', 'Data': '123'}]}], 'Success': 'true', 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DelAgent", "MessageTime": "2021-10-09 15:33:51", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DelAgent', 'MessageTime': '2021-10-09 15:33:53', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'true'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DropHttpCheck", "MessageTime": "2021-10-09 15:33:58", "Sender": "Centre0", "Content": []}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DropHttpCheck', 'MessageTime': '2021-10-09 15:34:00', 'Content': [], 'Success': 'true', 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DelAgent", "MessageTime": "2021-10-09 15:34:06", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DelAgent', 'MessageTime': '2021-10-09 15:34:07', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'false', 'ErrCode': '50', 'ErrMsg': 'The Agent does not exist'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "AddAgent", "MessageTime": "2021-10-09 15:42:09", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'AddAgent', 'MessageTime': '2021-10-09 15:42:11', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'true'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "SetHttpCheck", "MessageTime": "2021-10-09 15:42:16", "Sender": "Centre0", "Content": [{"Type": "content", "DataCheck": [{"method": "get", "DataType": "re", "Data": "123"}]}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'SetHttpCheck', 'MessageTime': '2021-10-09 15:42:18', 'Content': [{'Type': 'content', 'DataCheck': [{'method': 'get', 'DataType': 're', 'Data': '123'}]}], 'Success': 'true', 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DelAgent", "MessageTime": "2021-10-09 15:42:25", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DelAgent', 'MessageTime': '2021-10-09 15:42:26', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'true'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DropHttpCheck", "MessageTime": "2021-10-09 15:42:32", "Sender": "Centre0", "Content": []}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DropHttpCheck', 'MessageTime': '2021-10-09 15:42:33', 'Content': [], 'Success': 'true', 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
+Domain: hf.f1203.g01.xn_17.gw47 Send: {"MethodName": "DelAgent", "MessageTime": "2021-10-09 15:42:39", "Sender": "Centre0", "Content": [{"InProtocol": "http", "Type": 2, "InPort": 2287, "domain": "all", "SyncId": 27, "OutAddr": [{"OutPort": 80, "OutIp": "10.10.100.201"}], "InIp": "10.10.101.47"}]}
+
+Domain: hf.f1203.g01.xn_17.gw47 Receive: {'MethodName': 'DelAgent', 'MessageTime': '2021-10-09 15:42:41', 'Content': [{'InProtocol': 'http', 'Type': 2, 'InPort': 2287, 'domain': 'all', 'SyncId': 27, 'OutAddr': [{'OutPort': 80, 'OutIp': '10.10.100.201'}], 'InIp': '10.10.101.47', 'Success': 'false', 'ErrCode': '50', 'ErrMsg': 'The Agent does not exist'}], 'Sender': 'hf.f1203.g01.xn_17.gw47', 'Receiver': 'Centre0'}
+
