@@ -7,11 +7,14 @@
 3、
 '''
 # encoding='utf-8'
+import logging
+
+log = logging.getLogger(__name__)
 try:
     import os, sys, json, copy, time, threading, pika, ssl
 except Exception as err:
-    print('库文件导入失败!请检查需要导入的库文件是否已正确安装.\n错误信息如下:')
-    print(err)
+    log.warning('库文件导入失败!请检查需要导入的库文件是否已正确安装.\n错误信息如下:')
+    log.warning(err)
     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
 
 current_path = os.path.abspath(__file__)
@@ -44,7 +47,7 @@ class rabbitmq():
         port:rabbitmq的端口,默认为:5672!!!不是15672!!!
         '''
         if (not name) or (not passwd) or (not host) or (not base_path):
-            print('rabbitmq服务器地址,帐号和密码以及单元测试例的绝对目录地址都不可以为空!')
+            log.warning('rabbitmq服务器地址,帐号和密码以及单元测试例的绝对目录地址都不可以为空!')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         else:
             self.__host = str(host)  # Rabbitmq服务器地址
@@ -75,16 +78,16 @@ class rabbitmq():
             try:  # 导入版本配置等文件
                 import baseinfo as info
             except Exception as err:
-                print('版本配置文件导入失败!请检查: ' + base_path + '/common/baseinfo.py 文件是否存在.\n错误信息如下:')
-                print(err)
+                log.warning('版本配置文件导入失败!请检查: ' + base_path + '/common/baseinfo.py 文件是否存在.\n错误信息如下:')
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
                 del sys.path[0]  # 及时删除导入的环境变量,避免重复导入造成的异常错误
                 try:
                     self.__version = info.version  # 获取版本号
                 except Exception as err:
-                    print('版本号获取失败!请检查是否设置了版本号.错误信息如下:')
-                    print(err)
+                    log.warning('版本号获取失败!请检查是否设置了版本号.错误信息如下:')
+                    log.warning(err)
                     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             base_path = os.path.dirname(self.__base_path)  # 获取当前项目的上级文件夹
             self.__logs_path = base_path
@@ -93,8 +96,8 @@ class rabbitmq():
                 try:
                     os.makedirs(base_path + '/Logs/' + str(self.__version))
                 except Exception as err:
-                    print('保存当前版本的Logs目录创建失败!请检查文件夹是否有操作权限.\n错误信息如下:')
-                    print(err)
+                    log.warning('保存当前版本的Logs目录创建失败!请检查文件夹是否有操作权限.\n错误信息如下:')
+                    log.warning(err)
                     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             try:
                 if port == 5671:
@@ -105,32 +108,32 @@ class rabbitmq():
                     self.__rabbitmq = pika.ConnectionParameters(self.__host, self.__port, '/',
                                                                 pika.PlainCredentials(self.__name, self.__passwd),
                                                                 ssl_options=ssl_options)  # 定义Rabbitmq连接
-                    print(self.__rabbitmq)
+                    log.warning(self.__rabbitmq)
                 elif port == 5672:
                     self.__rabbitmq = pika.ConnectionParameters(self.__host, self.__port, '/',
                                                                 pika.PlainCredentials(self.__name, self.__passwd)
                                                                 )  # 定义Rabbitmq连接
-                print(self.__rabbitmq)
+                log.warning(self.__rabbitmq)
             except Exception as err:
-                print('Rabbitmq初始化失败!: ' + str(self.__host) + ':' + str(self.__port) + ' \n请检查相关参数的顺序和数据是否有误.错误内容如下:')
-                print(err)
+                log.warning('Rabbitmq初始化失败!: ' + str(self.__host) + ':' + str(self.__port) + ' \n请检查相关参数的顺序和数据是否有误.错误内容如下:')
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
                 # ssh服务器连接状态
                 self.__state = 0
-                print('Rabbitmq初始化完成: ' + str(self.__host) + ':' + str(self.__port))
+                log.warning('Rabbitmq初始化完成: ' + str(self.__host) + ':' + str(self.__port))
             '''
             try:
-                print('self.base_path: '+self.__rabbitmq_path+'/message.py')
+                log.warning('self.base_path: '+self.__rabbitmq_path+'/message.py')
                 #获取当前项目文件夹
                 if not os.path.exists(self.__rabbitmq_path+'/message.py'):
-                    print('请输入正确的单元测试例目录,并且在单元测试例目录下要存在message.py文件!\nmessage.py源文件在: '+str(self.__base_path)+' 目录下.')
+                    log.warning('请输入正确的单元测试例目录,并且在单元测试例目录下要存在message.py文件!\nmessage.py源文件在: '+str(self.__base_path)+' 目录下.')
                     sys.exit(0)#避免程序继续运行造成的异常崩溃,友好退出程序
                 with open(self.__rabbitmq_path+'/message.py','r',encoding='utf-8') as f:
                     self.__msg=json.loads(f.read())
             except Exception as err:
-                print('获取预设信息失败!错误信息如下:')
-                print(err)
+                log.warning('获取预设信息失败!错误信息如下:')
+                log.warning(err)
                 sys.exit(0)#避免程序继续运行造成的异常崩溃,友好退出程序
             '''
     #
@@ -140,7 +143,7 @@ class rabbitmq():
     #     调用方式为:实例化类名.connect()
     #     '''
     #     if self.__state:
-    #         print('Rabbitmq服务器: ' + str(self.__host) + ':' + str(
+    #         log.warning('Rabbitmq服务器: ' + str(self.__host) + ':' + str(
     #             self.__port) + ' 已连接!如果想建立新的连接,请执行:实例化类名.close()关闭以前的连接后,重新执行本方法.')
     #         sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
     #     else:
@@ -150,13 +153,13 @@ class rabbitmq():
     #             # 建立通道
     #             self.__s_channel: pika.adapters.blocking_connection.BlockingChannel = self.__s_rabbitmq.channel()
     #         except Exception as err:
-    #             print('Rabbitmq连接服务器: ' + str(self.__host) + ':' + str(
+    #             log.warning('Rabbitmq连接服务器: ' + str(self.__host) + ':' + str(
     #                 self.__port) + ' 失败!请检查相关参数的顺序和数据是否有误.\n服务器和本地网络异常也会导致连接失败.错误内容如下:')
-    #             print(err)
+    #             log.warning(err)
     #             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
     #         else:
     #             self.__state = 1
-    #             print('Rabbitmq服务器连接: ' + str(self.__host) + ':' + str(self.__port) + ' 成功.')
+    #             log.warning('Rabbitmq服务器连接: ' + str(self.__host) + ':' + str(self.__port) + ' 成功.')
 
     def close(self):
         '''
@@ -167,15 +170,15 @@ class rabbitmq():
             try:
                 self.__s_rabbitmq.close()
             except Exception as err:
-                print('Rabbitmq连接: ' + str(self.__host) + ':' + str(self.__port) + ' 关闭失败!请检查相关配置.错误内容如下:')
-                print(err)
+                log.warning('Rabbitmq连接: ' + str(self.__host) + ':' + str(self.__port) + ' 关闭失败!请检查相关配置.错误内容如下:')
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
                 self.__state = 0
 
-                print('Rabbitmq连接: ' + str(self.__host) + ':' + str(self.__port) + ' 已断开.')
+                log.warning('Rabbitmq连接: ' + str(self.__host) + ':' + str(self.__port) + ' 已断开.')
         else:
-            print('Rabbitmq连接: ' + str(self.__host) + ':' + str(self.__port) + ' 在此之前未成功连接或在此之前已断开连接.')
+            log.warning('Rabbitmq连接: ' + str(self.__host) + ':' + str(self.__port) + ' 在此之前未成功连接或在此之前已断开连接.')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
 
     def reset(self, **exc):
@@ -202,14 +205,14 @@ class rabbitmq():
 		value:根据错误信息提示输入不同的类型
 		able:根据错误信息提示,输入ture或false'''
         if not isinstance(exc, dict):  # 如果不是字典类型,自动停止
-            print(msg)
+            log.warning(msg)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         key = exc.keys()  # 返回所有的建
         if ('name' not in key) and (('value' not in key) or ('able' not in key)):
-            print(msg)
+            log.warning(msg)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if exc['name'] != 'flow' and exc['name'] != 'manage' and exc['name'] != 'global':
-            print(msg)
+            log.warning(msg)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if exc['name'] == 'flow':
             if 'value' in key:
@@ -238,10 +241,10 @@ class rabbitmq():
         如果提示:exchange_type或durable错误,请先执行reset方法后,再调用本方法.具体操作方式可查看reset的帮助文档.
         '''
         if not exc:
-            print('请输入交换机名称!')
+            log.warning('请输入交换机名称!')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if not domain:
-            print('请输入anget主机名domain!\nanegt主机名由后台服务提供.')
+            log.warning('请输入anget主机名domain!\nanegt主机名由后台服务提供.')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if exc == 'ManageExchange':
             exc_type = self.__manage_exchange_type
@@ -253,11 +256,11 @@ class rabbitmq():
             exc_type = self.__flow_exchange_type
             able = self.__flow_durable
         # try:
-        # 	print('-----------'+path+'--------------------')
+        # 	log.warning('-----------'+path+'--------------------')
         # 	# path = path.replace('\\', '/')
         # 	# sys.path.insert(0, path)
         # 	if not os.path.exists(path+'/message.py'):
-        # 		print('请输入正确的单元测试例目录,并且在单元测试例目录下要存在message.py文件!')
+        # 		log.warning('请输入正确的单元测试例目录,并且在单元测试例目录下要存在message.py文件!')
         # 		sys.exit(0)
         # 	# path = path.split('/')[-1]
         # 	# # with open(path+'/message.py','r',encoding='utf-8') as f:
@@ -265,19 +268,19 @@ class rabbitmq():
         # 	# self.__msg = message.data
         # 	# del sys.path[0]
         # except Exception as err:
-        # 	print('获取rmb接口参数失败，错误信息如下：')
-        # 	print(err)
+        # 	log.warning('获取rmb接口参数失败，错误信息如下：')
+        # 	log.warning(err)
         # 	sys.exit(0)
 
         if method:
             # if method not in self.__msg.keys():
             msg_0 = method
-        # print('methodname输入错误!请检查后重新输入.\n如果添加了新的methodname,请在: '+path+'/message.py 文件中修改相应的配置.')
+        # log.warning('methodname输入错误!请检查后重新输入.\n如果添加了新的methodname,请在: '+path+'/message.py 文件中修改相应的配置.')
         # sys.exit(0)#避免程序继续运行造成的异常崩溃,友好退出程序
         # else:
         # 	msg_0 = copy.deepcopy(self.__msg[method])#获取要发送的信息
         else:
-            print('请输入有效的Methodname!')
+            log.warning('请输入有效的Methodname!')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:
             try:
@@ -288,35 +291,35 @@ class rabbitmq():
                 # 连接交换机
                 self.__s_channel.exchange_declare(exchange=exc, exchange_type=exc_type, durable=able)
             except Exception as err:
-                print('Rabbitmq连接服务器: ' + str(self.__host) + ':' + str(
+                log.warning('Rabbitmq连接服务器: ' + str(self.__host) + ':' + str(
                     self.__port) + ' 失败!请检查相关参数的顺序和数据是否有误.\n服务器和本地网络异常也会导致连接失败.错误内容如下:')
-                print(err)
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
                 self.__state = 1
-                print('Rabbitmq服务器连接: ' + str(self.__host) + ':' + str(self.__port) + ' 成功.')
+                log.warning('Rabbitmq服务器连接: ' + str(self.__host) + ':' + str(self.__port) + ' 成功.')
 
         except Exception as err:
-            print('exchange=%s,exchange_type=%s,durable=%s' % {exc, exc_type, able})
-            print('send:交换机连接失败!可能是网络原因或配置信息错误.错误信息如下:')
-            print(err)
+            log.warning('exchange=%s,exchange_type=%s,durable=%s' % {exc, exc_type, able})
+            log.warning('send:交换机连接失败!可能是网络原因或配置信息错误.错误信息如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:  # 需要后台提供queue,然后对exchange绑定queue,将消息传输到对应的queue
             self.__s_channel.queue_bind(exchange=exc, queue=domain + '.down')
         except Exception as err:
-            print('queue绑定失败!可能是网络原因或配置信息错误.错误信息如下:')
-            print(err)
+            log.warning('queue绑定失败!可能是网络原因或配置信息错误.错误信息如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:
             msg_0['MessageTime'] = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
             msg_0 = json.dumps(msg_0)
             self.__s_channel.basic_publish(exchange=exc, routing_key=domain + '.down', body=msg_0)  # 向交换机exc发送数据msg
         except Exception as err:
-            print('向Rabbitmq发送信息失败!错误信息如下:')
-            print(err)
+            log.warning('向Rabbitmq发送信息失败!错误信息如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         else:
-            print('向Rabbitmq发送信息成功!')
+            log.warning('向Rabbitmq发送信息成功!')
             self.__thread_time[domain] = time.time()  # 将当前domian最后一次发送成功信息的时间保存
             with open(self.__logs_path + '/Logs/' + str(self.__version) + '/rabbitmq.logs', 'a', encoding='utf-8') as f:
                 f.write('Domain: ' + str(domain) + ' Send: ' + str(msg_0) + '\n\n')
@@ -327,21 +330,21 @@ class rabbitmq():
                     rev.start()
                 except Exception as err:
                     del self.__domain[-1]
-                    print('Domain值为: ' + str(self.__domain[-1]) + '的Rabbitmq信息接收线程获取失败!\n错误信息如下:')
-                    print(err)
+                    log.warning('Domain值为: ' + str(self.__domain[-1]) + '的Rabbitmq信息接收线程获取失败!\n错误信息如下:')
+                    log.warning(err)
                     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                 else:
-                    print('Domain值为: ' + str(self.__domain[-1]) + '的Rabbitmq信息接收线程已开启!')
+                    log.warning('Domain值为: ' + str(self.__domain[-1]) + '的Rabbitmq信息接收线程已开启!')
 
     def __receive(self, exc='', domain=''):
         '''
         receive线程函数,内部调用,不可外部访问
         '''
         if not exc:
-            print('请输入交换机名称!')
+            log.warning('请输入交换机名称!')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if not domain:
-            print('请输入anget主机名domain!\nanegt主机名由后台服务提供.')
+            log.warning('请输入anget主机名domain!\nanegt主机名由后台服务提供.')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if exc == 'ManageExchange':
             exc_type = self.__manage_exchange_type
@@ -358,21 +361,21 @@ class rabbitmq():
             globals()[r_rabbitmq] = pika.BlockingConnection(self.__rabbitmq)
             globals()[r_channel] = globals()[r_rabbitmq].channel()
         except Exception as err:
-            print('创建domain为: ' + str(domain) + ' 的接收管道失败!\n错误信息如下:')
-            print(err)
+            log.warning('创建domain为: ' + str(domain) + ' 的接收管道失败!\n错误信息如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:
             globals()[r_channel].exchange_declare(exchange=exc, exchange_type=exc_type, durable=able)  # 连接交换机
         except Exception as err:
-            print('exchange=%s,exchange_type=%s,durable=%s' % {exc, exc_type, able})
-            print('交换机连接失败!可能是网络原因或配置信息错误.错误信息如下:')
-            print(err)
+            log.warning('exchange=%s,exchange_type=%s,durable=%s' % {exc, exc_type, able})
+            log.warning('交换机连接失败!可能是网络原因或配置信息错误.错误信息如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:
             globals()[r_channel].queue_bind(exchange=exc, queue=domain + '.up')
         except Exception as err:
-            print('queue绑定失败!可能是网络原因或配置信息错误.错误信息如下:')
-            print(err)
+            log.warning('queue绑定失败!可能是网络原因或配置信息错误.错误信息如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:
             if len(self.__thread_time.keys()) > 0:
@@ -385,13 +388,13 @@ class rabbitmq():
                                 try:
                                     globals()['self.__r_' + str(domain) + 'rabbitmq'].close()
                                 except Exception as err:
-                                    print('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭失败!\n错误信息如下:')
-                                    print(err)
+                                    log.warning('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭失败!\n错误信息如下:')
+                                    log.warning(err)
                                     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                                 else:
                                     del self.__domain[self.__domain.index(domain)]
                                     del self.__thread_time[domain]
-                                    print('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭成功!')
+                                    log.warning('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭成功!')
                                     break
                             else:
                                 continue
@@ -409,13 +412,13 @@ class rabbitmq():
                                 try:
                                     globals()['self.__r_' + str(domain) + 'rabbitmq'].close()
                                 except Exception as err:
-                                    print('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭失败!\n错误信息如下:')
-                                    print(err)
+                                    log.warning('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭失败!\n错误信息如下:')
+                                    log.warning(err)
                                     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                                 else:
                                     del self.__domain[self.__domain.index(domain)]
                                     del self.__thread_time[domain]
-                                    print('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭成功!')
+                                    log.warning('Domain值为: ' + str(domain) + ' 的Rabbitmq信息接收管道关闭成功!')
                                     break
                             else:
                                 continue
@@ -424,12 +427,12 @@ class rabbitmq():
 
                 '''下面是线程阻断的接收方式'''
         # def callback(ch, method, properties, body):
-        #	print('收到数据：', json.loads(body))
+        #	log.warning('收到数据：', json.loads(body))
         # globals()[r_channel].basic_consume(domain+'.up',callback,auto_ack=True)
         # globals()[r_channel].start_consuming()
         except Exception as err:
-            print('rabbitmq信息接收失败!错误信息如下: ')
-            print(err)
+            log.warning('rabbitmq信息接收失败!错误信息如下: ')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
 
 # if __name__ == '__main__':

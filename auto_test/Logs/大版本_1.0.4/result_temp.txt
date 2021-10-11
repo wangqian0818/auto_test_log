@@ -1,7 +1,7 @@
 
 --------------------- 开始执行 case：E:/Projects_Py/auto_test_log_dir/auto_test/Case_rbm/http_check_get/function.py
-result: test_http_check_get_a1 -- passed		20211009_15-42-46
-result: test_http_check_get_a2 -- skipped		20211009_15-42-47
+result: test_http_check_get_a1 -- passed		20211011_09-30-23
+result: test_http_check_get_a2 -- passed		20211011_09-31-08
 --------------------- 执行结束 case：E:/Projects_Py/auto_test_log_dir/auto_test/Case_rbm/http_check_get/function.py
 
 

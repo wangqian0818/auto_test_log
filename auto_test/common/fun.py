@@ -60,11 +60,11 @@ mac = ['gw', 'c', 's', 'FrontDut', 'BackDut', 'BG8010Client', 'BG8010Server', 'h
 
 def cmd(cmd='', domain='', thread=0, timeout=None, list_flag=False):  # cmd执行函数
     if not cmd:
-        log.info('请输入cmd指令!')
+        log.warning('请输入cmd指令!')
         print('请输入cmd指令!')
         sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
     if domain not in mac:
-        log.info('请输入有效的ssh主机代号!')
+        log.warning('请输入有效的ssh主机代号!')
         print('请输入有效的ssh主机代号!')
         sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
     ssh_name = 'ssh_' + str(domain)
@@ -156,12 +156,12 @@ def pid_kill(content, process='python', non_content='bash', gw='s'):
         cmd1 = f'ps -ef | grep {process} | grep {pcap_dip} | grep {content} |grep -v grep'
     while True:
         a = cmd(cmd1, gw)
-        log.info('命令为：{}'.format(cmd1))
+        log.warning('命令为：{}'.format(cmd1))
         # print('命令为：{}'.format(cmd1))
-        log.info('命令获取的结果为：{}'.format(a))
+        log.warning('命令获取的结果为：{}'.format(a))
         # print('命令获取的结果为：{}'.format(a))
         ls = a.split('\n')
-        log.info('将结果分割后的列表为：{}'.format(ls))
+        log.warning('将结果分割后的列表为：{}'.format(ls))
         # print('将结果分割后的列表为：{}'.format(ls))
         for pro in ls:
             # if 'bash' in pro:
@@ -229,10 +229,10 @@ def qos_speed(file, s_txt, qbucket='p'):
 
 
 def wait_data(command, device, context, name='进程', number=300, timeout=0.1, flag='存在'):
-    log.info('当前时间为{}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
+    log.warning('当前时间为{}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
     # print('当前时间为{}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
     a = cmd(command, device)
-    log.info('第一次获取的结果为：{}'.format(a))
+    log.warning('第一次获取的结果为：{}'.format(a))
     # print('第一次获取的结果为：{}'.format(a))
     tmp = 0
     time.sleep(1)
@@ -241,27 +241,27 @@ def wait_data(command, device, context, name='进程', number=300, timeout=0.1, 
             if tmp < number:
                 time.sleep(timeout)
                 tmp += 1
-                log.info('这是{}的第{}次等待'.format(name, tmp))
+                log.warning('这是{}的第{}次等待'.format(name, tmp))
                 # print('这是{}的第{}次等待'.format(name, tmp))
                 a = cmd(command, device)
-                log.info(a)
+                log.warning(a)
                 # print(a)
             else:
                 # print('{}检查结果失败'.format(name))
-                log.info('{}检查结果失败'.format(name))
+                log.warning('{}检查结果失败'.format(name))
                 return 0
     else:
         while context in a:
             if tmp < number:
-                log.info(a)
+                log.warning(a)
                 # print(a)
                 time.sleep(timeout)
                 tmp += 1
-                log.info('这是{}的第{}次等待'.format(name, tmp))
+                log.warning('这是{}的第{}次等待'.format(name, tmp))
                 # print('这是{}的第{}次等待'.format(name, tmp))
                 a = cmd(command, device)
             else:
-                log.info('{}检查结果失败'.format(name))
+                log.warning('{}检查结果失败'.format(name))
                 # print('{}检查结果失败'.format(name))
                 return 0
     return a
@@ -269,10 +269,10 @@ def wait_data(command, device, context, name='进程', number=300, timeout=0.1, 
 
 def nginx_worker(command, device, context, non_context1='nginx: worker process is shutting down',
                  non_context2='systemctl reload nginx_kernel', name='进程', number=300, timeout=0.1):
-    log.info('当前时间为{}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
+    log.warning('当前时间为{}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
     # print('当前时间为{}'.format(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
     a = cmd(command, device)
-    log.info('第一次获取的结果为：{}'.format(a))
+    log.warning('第一次获取的结果为：{}'.format(a))
     # print('第一次获取的结果为：{}'.format(a))
     tmp = 0
     num = 0
@@ -283,10 +283,10 @@ def nginx_worker(command, device, context, non_context1='nginx: worker process i
             num = 0  # 每次循环，进程数需重新置为0
             time.sleep(timeout)
             tmp += 1
-            log.info('这是{}的第{}次等待'.format(name, tmp))
+            log.warning('这是{}的第{}次等待'.format(name, tmp))
             # print('这是{}的第{}次等待'.format(name, tmp))
             b = cmd(command, device)
-            log.info(b)
+            log.warning(b)
             # print(b)
             if non_context2 in b:
                 continue
@@ -295,15 +295,15 @@ def nginx_worker(command, device, context, non_context1='nginx: worker process i
                 for i in c:
                     if context in i and non_context1 not in i:
                         num += 1
-                log.info('当前有{}个{}启动成功'.format(num, name))
+                log.warning('当前有{}个{}启动成功'.format(num, name))
                 # print('当前有{}个{}启动成功'.format(num, name))
             if num == 24:
-                log.info('{}个{}全部启动成功'.format(num, name))
+                log.warning('{}个{}全部启动成功'.format(num, name))
                 # print('{}个{}全部启动成功'.format(num, name))
                 res = 1
                 break
         else:
-            log.info('{}启动失败'.format(name))
+            log.warning('{}启动失败'.format(name))
             # print('{}启动失败'.format(name))
             break
     return res
@@ -321,7 +321,7 @@ def get_nginx_worker(str, split_str='root', context='worker', non_context='nginx
 
 
 def get_dut_version(case):
-    log.info('获取设备版本号，并写入到文件dut_version.txt')
+    log.warning('获取设备版本号，并写入到文件dut_version.txt')
     # print('获取设备版本号，并写入到文件dut_version.txt')
     result_file = base_path + r'/auto_test/dut_version.txt'
     # 清空文件： result_temp.txt
@@ -334,7 +334,7 @@ def get_dut_version(case):
             ssh_FrontDut.connect()
             ssh_BackDut.connect()
             # 隔离的前置机查询
-            log.info('-------------------------- 隔离前置机版本号 -----------------------------')
+            log.warning('-------------------------- 隔离前置机版本号 -----------------------------')
             # print('-------------------------- 隔离前置机版本号 -----------------------------')
             file.write('---------------------------- 隔离前置机版本号 ---------------------------\n')
             re = cmd('rpm -qa | grep agentjsac', 'FrontDut')
@@ -357,7 +357,7 @@ def get_dut_version(case):
             file.write(re)
 
             # 隔离的后置机查询
-            log.info('-------------------------- 隔离后置机版本号 -------------------------------')
+            log.warning('-------------------------- 隔离后置机版本号 -------------------------------')
             # print('-------------------------- 隔离后置机版本号 -------------------------------')
             file.write('--------------------------- 隔离后置机版本号 ----------------------------\n')
             re = cmd('rpm -qa | grep agentjsac', 'BackDut')
@@ -382,7 +382,7 @@ def get_dut_version(case):
             ssh_BackDut.close()
         else:
             ssh_gw.connect()
-            log.info('------------------------- 网关设备版本号 ------------------------------')
+            log.warning('------------------------- 网关设备版本号 ------------------------------')
             # print('------------------------- 网关设备版本号 ------------------------------')
             file.write('-------------------------- 网关设备版本号 -----------------------------\n')
             re = cmd('rpm -qa | grep agentjsac', 'gw')

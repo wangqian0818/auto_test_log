@@ -1,0 +1,796 @@
+2021-10-09 17:38:03 [INFO] Connected (version 2.0, client OpenSSH_8.3)
+2021-10-09 17:38:03 [INFO] Authentication (password) successful!
+2021-10-09 17:38:05 [INFO] 当前时间为2021-10-09 17:38:05
+2021-10-09 17:38:05 [INFO] 第一次获取的结果为：root      15062      1  3 Oct08 ?        00:49:49 /usr/bin/agentjsac -c /etc/jsac/agentjsac.config
+root     346645 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep agentjsac
+root     346653 346645  0 17:38 ?        00:00:00 grep agentjsac
+
+2021-10-09 17:38:06 [INFO] 当前时间为2021-10-09 17:38:06
+2021-10-09 17:38:06 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:15 nginx: master process /usr/local/nginx/sbin/nginx
+root     345226  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345227  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345228  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345229  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345230  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345231  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345232  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345233  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345234  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345235  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345236  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345237  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345238  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345239  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345240  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345241  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345242  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345243  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345244  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345245  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345246  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345247  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345249  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345256  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     346661 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346669 346661  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:11 [INFO] 这是进程的第1次等待
+2021-10-09 17:38:11 [INFO] root      14978      1  0 Oct08 ?        00:02:15 nginx: master process /usr/local/nginx/sbin/nginx
+root     345226  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345227  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345228  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345229  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345230  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345231  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345232  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345233  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345234  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345235  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345236  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345237  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345238  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345239  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345240  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345241  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345242  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345243  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345244  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345245  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345246  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345247  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345249  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345256  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     346677 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346685 346677  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:11 [INFO] 当前有24个进程启动成功
+2021-10-09 17:38:11 [INFO] 24个进程全部启动成功
+2021-10-09 17:38:11 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:11 [INFO] Socket connected: <socket.socket fd=1060, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 24997), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:11 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=1060, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 24997), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:11 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A23470>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A23470> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:11 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A23470> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:11 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A23470> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:11 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A23470> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:11 [INFO] Created channel=1
+2021-10-09 17:38:11 [INFO] 当前时间为2021-10-09 17:38:11
+2021-10-09 17:38:11 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:11 [INFO] Socket connected: <socket.socket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25000), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:11 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25000), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:11 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A47C18>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A47C18> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:11 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A47C18> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:11 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A47C18> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:11 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A47C18> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:11 [INFO] Created channel=1
+2021-10-09 17:38:11 [INFO] Created new queue consumer generator <_QueueConsumerGeneratorInfo params=('hf.f1203.g01.xn_17.gw47.up', True, False) consumer_tag='ctag1.6f96a5e3bd004cd39788bd9cd0a4ee67'>
+2021-10-09 17:38:11 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:15 nginx: master process /usr/local/nginx/sbin/nginx
+root     345226  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345227  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345228  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345229  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345230  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345231  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345232  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345233  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345234  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345235  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345236  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345237  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345238  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345239  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345240  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345241  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345242  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345243  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345244  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345245  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345246  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345247  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345249  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345256  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     346686 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346687  15062  0 17:38 ?        00:00:00 sh -c python3.6 /opt/nginx/tools/nginx_config.py kernel > /dev/null 2>&1
+root     346688 346687  0 17:38 ?        00:00:00 python3.6 /opt/nginx/tools/nginx_config.py kernel
+root     346696 346686  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:12 [INFO] 当前时间为2021-10-09 17:38:12
+2021-10-09 17:38:12 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:16 nginx: master process /usr/local/nginx/sbin/nginx
+root     345226  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345227  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345228  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345229  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345230  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345231  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345232  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345233  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345234  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345235  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345236  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345237  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345238  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345239  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345240  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345241  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345242  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345243  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345244  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345245  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345246  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345247  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345249  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     345256  14978  0 17:32 ?        00:00:00 nginx: worker process
+root     346733 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346741 346733  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:16 [INFO] Closing connection (200): Normal shutdown
+2021-10-09 17:38:16 [INFO] Closing channel (200): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A47C18> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:16 [INFO] Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A47C18> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:16 [INFO] Closing connection (200): 'Normal shutdown'
+2021-10-09 17:38:16 [INFO] Aborting transport connection: state=1; <ssl.SSLSocket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25000), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:16 [INFO] _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; <ssl.SSLSocket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25000), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:16 [INFO] Deactivating transport: state=1; <ssl.SSLSocket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25000), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:16 [INFO] AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:16 [INFO] Stack terminated due to ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:16 [INFO] Closing transport socket and unlinking: state=3; <ssl.SSLSocket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25000), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:16 [INFO] User-initiated close: result=BlockingConnection__OnClosedArgs(connection=<SelectConnection CLOSED transport=None params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>, error=ConnectionClosedByClient: (200) 'Normal shutdown')
+2021-10-09 17:38:17 [INFO] 这是进程的第1次等待
+2021-10-09 17:38:17 [INFO] root      14978      1  0 Oct08 ?        00:02:16 nginx: master process /usr/local/nginx/sbin/nginx
+root     346744  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346745  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346746  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346747  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346748  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346749  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346750  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346751  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346752  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346753  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346754  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346756  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346757  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346758  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346759  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346760  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346761  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346762  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346763  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346764  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346765  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346766  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346767  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346768  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346774 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346782 346774  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:17 [INFO] 当前有24个进程启动成功
+2021-10-09 17:38:17 [INFO] 24个进程全部启动成功
+2021-10-09 17:38:17 [INFO] 当前时间为2021-10-09 17:38:17
+2021-10-09 17:38:17 [INFO] 第一次获取的结果为：tcp        0      0 10.10.101.47:2287       0.0.0.0:*               LISTEN      14978/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      14978/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13089/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12556/zabbix_agentd 
+tcp        0      0 10.10.101.47:9144       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp        0      0 10.10.101.47:22         10.10.100.136:1187      ESTABLISHED 24702/sshd: root@pt 
+tcp        0      0 10.10.101.47:22         10.10.100.136:24949     ESTABLISHED 346492/sshd: root@n 
+tcp    85174      0 10.10.101.47:9146       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp6       0      0 :::20022                :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      13089/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12556/zabbix_agentd 
+
+2021-10-09 17:38:18 [INFO] 添加策略_re: 
+2021-10-09 17:38:18 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:18 [INFO] Socket connected: <socket.socket fd=1004, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25011), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:18 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=1004, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25011), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:18 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7A0F0>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7A0F0> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:18 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7A0F0> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:18 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7A0F0> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:18 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7A0F0> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:18 [INFO] Created channel=1
+2021-10-09 17:38:18 [INFO] 当前时间为2021-10-09 17:38:18
+2021-10-09 17:38:18 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:18 [INFO] Socket connected: <socket.socket fd=684, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25014), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:18 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=684, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25014), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:18 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A68668>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A68668> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:18 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A68668> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:18 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A68668> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:18 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A68668> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:18 [INFO] Created channel=1
+2021-10-09 17:38:18 [INFO] Created new queue consumer generator <_QueueConsumerGeneratorInfo params=('hf.f1203.g01.xn_17.gw47.up', True, False) consumer_tag='ctag1.ddd6bb8c815a46c9a05b2deeef1430d2'>
+2021-10-09 17:38:18 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:16 nginx: master process /usr/local/nginx/sbin/nginx
+root     346744  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346745  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346746  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346747  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346748  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346749  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346750  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346751  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346752  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346753  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346754  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346756  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346757  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346758  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346759  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346760  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346761  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346762  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346763  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346764  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346765  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346766  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346767  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346768  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346792 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346802 346792  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:19 [INFO] 当前时间为2021-10-09 17:38:19
+2021-10-09 17:38:19 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:17 nginx: master process /usr/local/nginx/sbin/nginx
+root     346744  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346745  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346746  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346747  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346748  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346749  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346750  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346751  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346752  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346753  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346754  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346756  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346757  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346758  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346759  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346760  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346761  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346762  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346763  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346764  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346765  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346766  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346767  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346768  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346817  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346818  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346819  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346820  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346821  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346822  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346823  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346824  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346825  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346826 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346829  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346835 346826  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:23 [INFO] Closing connection (200): Normal shutdown
+2021-10-09 17:38:23 [INFO] Closing channel (200): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A68668> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:23 [INFO] Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A68668> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:23 [INFO] Closing connection (200): 'Normal shutdown'
+2021-10-09 17:38:23 [INFO] Aborting transport connection: state=1; <ssl.SSLSocket fd=684, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25014), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:23 [INFO] _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; <ssl.SSLSocket fd=684, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25014), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:23 [INFO] Deactivating transport: state=1; <ssl.SSLSocket fd=684, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25014), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:23 [INFO] AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:23 [INFO] Stack terminated due to ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:23 [INFO] Closing transport socket and unlinking: state=3; <ssl.SSLSocket fd=684, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25014), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:23 [INFO] User-initiated close: result=BlockingConnection__OnClosedArgs(connection=<SelectConnection CLOSED transport=None params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>, error=ConnectionClosedByClient: (200) 'Normal shutdown')
+2021-10-09 17:38:25 [INFO] 这是进程的第1次等待
+2021-10-09 17:38:25 [INFO] root      14978      1  0 Oct08 ?        00:02:17 nginx: master process /usr/local/nginx/sbin/nginx
+root     346817  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346818  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346819  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346820  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346821  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346822  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346823  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346824  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346825  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346829  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346836  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346837  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346838  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346839  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346840  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346841  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346842  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346850  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346851  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346852  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346853  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346854  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346855  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346856  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346892 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346900 346892  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:25 [INFO] 当前有24个进程启动成功
+2021-10-09 17:38:25 [INFO] 24个进程全部启动成功
+2021-10-09 17:38:25 [INFO] 当前时间为2021-10-09 17:38:25
+2021-10-09 17:38:25 [INFO] 第一次获取的结果为：{
+	"c_get_args":	{
+		"w":	0,
+		"k":	["123"]
+	}
+}
+2021-10-09 17:38:26 [INFO] 需包含字符串：c_get_args
+2021-10-09 17:38:26 [INFO] httpCheck_re: {
+	"c_get_args":	{
+		"w":	0,
+		"k":	["123"]
+	}
+}
+2021-10-09 17:38:26 [INFO] 当前时间为2021-10-09 17:38:26
+2021-10-09 17:38:26 [INFO] 第一次获取的结果为：{
+	"c_get_args":	{
+		"w":	0,
+		"k":	["123"]
+	}
+}
+2021-10-09 17:38:27 [INFO] 需包含字符串：123
+2021-10-09 17:38:27 [INFO] httpCheck_re: {
+	"c_get_args":	{
+		"w":	0,
+		"k":	["123"]
+	}
+}
+2021-10-09 17:38:27 [INFO] get普通请求的请求内容为：You got right!
+2021-10-09 17:38:27 [INFO] [chan 30] Opened sftp connection (server version 3)
+2021-10-09 17:38:27 [INFO] ---------fun.search: 
+['bind.sh', 'export.sh', 'version.sh', 'run_gw.sh', 'switch.sh', 'switch2.sh']
+2021-10-09 17:38:27 [INFO] get请求内容不包含黑名单的请求应返回的内容为：You got right!
+2021-10-09 17:38:27 [INFO] get请求内容包含黑名单返回的状态码为：403
+2021-10-09 17:38:27 [INFO] --------------------------------------------11111111111111111
+2021-10-09 17:38:27 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:27 [INFO] Socket connected: <socket.socket fd=932, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25028), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:27 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=932, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25028), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:27 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A93550>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A93550> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:27 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A93550> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:27 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A93550> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:27 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A93550> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:27 [INFO] Created channel=1
+2021-10-09 17:38:27 [INFO] 当前时间为2021-10-09 17:38:27
+2021-10-09 17:38:27 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:27 [INFO] Socket connected: <socket.socket fd=1064, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25031), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:27 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=1064, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25031), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:27 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82588>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82588> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:27 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82588> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:27 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82588> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:27 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82588> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:27 [INFO] Created channel=1
+2021-10-09 17:38:27 [INFO] Created new queue consumer generator <_QueueConsumerGeneratorInfo params=('hf.f1203.g01.xn_17.gw47.up', True, False) consumer_tag='ctag1.78015264f43742fdb73cdcfa35494311'>
+2021-10-09 17:38:27 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:17 nginx: master process /usr/local/nginx/sbin/nginx
+root     346817  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346818  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346819  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346820  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346821  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346822  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346823  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346824  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346825  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346829  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346836  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346837  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346838  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346839  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346840  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346841  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346842  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346850  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346851  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346852  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346853  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346854  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346855  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346856  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346936 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346937  15062  0 17:38 ?        00:00:00 sh -c python3.6 /opt/nginx/tools/nginx_config.py kernel > /dev/null 2>&1
+root     346940 346937  0 17:38 ?        00:00:00 python3.6 /opt/nginx/tools/nginx_config.py kernel
+root     346946 346936  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:28 [INFO] 当前时间为2021-10-09 17:38:28
+2021-10-09 17:38:28 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:17 nginx: master process /usr/local/nginx/sbin/nginx
+root     346817  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346818  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346819  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346820  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346821  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346822  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346823  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346824  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346825  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346829  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346836  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346837  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346838  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346839  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346840  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346841  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346842  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346850  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346851  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346852  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346853  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346854  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346855  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346856  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346983 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     346991 346983  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:32 [INFO] Closing connection (200): Normal shutdown
+2021-10-09 17:38:32 [INFO] Closing channel (200): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82588> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:32 [INFO] Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82588> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:32 [INFO] Closing connection (200): 'Normal shutdown'
+2021-10-09 17:38:32 [INFO] Aborting transport connection: state=1; <ssl.SSLSocket fd=1064, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25031), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:32 [INFO] _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; <ssl.SSLSocket fd=1064, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25031), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:32 [INFO] Deactivating transport: state=1; <ssl.SSLSocket fd=1064, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25031), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:32 [INFO] AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:32 [INFO] Stack terminated due to ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:32 [INFO] Closing transport socket and unlinking: state=3; <ssl.SSLSocket fd=1064, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 25031), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:32 [INFO] User-initiated close: result=BlockingConnection__OnClosedArgs(connection=<SelectConnection CLOSED transport=None params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>, error=ConnectionClosedByClient: (200) 'Normal shutdown')
+2021-10-09 17:38:33 [INFO] 这是进程的第1次等待
+2021-10-09 17:38:33 [INFO] root      14978      1  0 Oct08 ?        00:02:18 nginx: master process /usr/local/nginx/sbin/nginx
+root     346992  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346993  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346994  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346995  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346996  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346997  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346998  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346999  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347000  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347001  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347002  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347003  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347004  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347005  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347006  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347007  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347008  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347009  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347010  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347011  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347012  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347013  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347014  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347015  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347016 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     347024 347016  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:33 [INFO] 当前有24个进程启动成功
+2021-10-09 17:38:33 [INFO] 24个进程全部启动成功
+2021-10-09 17:38:33 [INFO] 当前时间为2021-10-09 17:38:33
+2021-10-09 17:38:33 [INFO] 第一次获取的结果为：tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      14978/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13089/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12556/zabbix_agentd 
+tcp        0      0 10.10.101.47:9144       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp        0      0 10.10.101.47:22         10.10.100.136:1187      ESTABLISHED 24702/sshd: root@pt 
+tcp        0      0 10.10.101.47:22         10.10.100.136:24949     ESTABLISHED 346492/sshd: root@n 
+tcp    85211      0 10.10.101.47:9146       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp6       0      0 :::20022                :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      13089/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12556/zabbix_agentd 
+
+2021-10-09 17:38:34 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:34 [INFO] Socket connected: <socket.socket fd=948, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1039), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:34 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=948, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1039), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:34 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221AB5940>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221AB5940> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:34 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221AB5940> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:34 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221AB5940> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:34 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221AB5940> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:34 [INFO] Created channel=1
+2021-10-09 17:38:34 [INFO] 当前时间为2021-10-09 17:38:34
+2021-10-09 17:38:34 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:34 [INFO] Socket connected: <socket.socket fd=1180, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1052), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:34 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=1180, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1052), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:34 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82AC8>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82AC8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:34 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82AC8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:34 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82AC8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:34 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82AC8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:34 [INFO] Created channel=1
+2021-10-09 17:38:34 [INFO] Created new queue consumer generator <_QueueConsumerGeneratorInfo params=('hf.f1203.g01.xn_17.gw47.up', True, False) consumer_tag='ctag1.c2118bd3811d4785b81b86280fce558d'>
+2021-10-09 17:38:34 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:18 nginx: master process /usr/local/nginx/sbin/nginx
+root     346992  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346993  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346994  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346995  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346996  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346997  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346998  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346999  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347000  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347001  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347002  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347003  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347004  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347005  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347006  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347007  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347008  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347009  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347010  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347011  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347012  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347013  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347014  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347015  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347034 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     347044 347034  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:35 [INFO] 当前时间为2021-10-09 17:38:35
+2021-10-09 17:38:35 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:19 nginx: master process /usr/local/nginx/sbin/nginx
+root     346992  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346993  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346994  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346995  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346996  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346997  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346998  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     346999  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347000  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347001  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347002  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347003  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347004  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347005  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347006  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347007  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347008  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347009  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347010  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347011  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347012  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347013  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347014  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347015  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347052  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347053  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347054  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347055  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347056  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347057  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347058  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347059  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347060  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347061  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347062  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347063  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347064  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347065  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347066  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347067  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347068  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347069  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347070  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347071  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347072  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347073  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347074  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347075  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347076 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     347084 347076  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:39 [INFO] Closing connection (200): Normal shutdown
+2021-10-09 17:38:39 [INFO] Closing channel (200): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82AC8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:39 [INFO] Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A82AC8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:39 [INFO] Closing connection (200): 'Normal shutdown'
+2021-10-09 17:38:39 [INFO] Aborting transport connection: state=1; <ssl.SSLSocket fd=1180, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1052), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:39 [INFO] _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; <ssl.SSLSocket fd=1180, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1052), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:39 [INFO] Deactivating transport: state=1; <ssl.SSLSocket fd=1180, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1052), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:39 [INFO] AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:39 [INFO] Stack terminated due to ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:39 [INFO] Closing transport socket and unlinking: state=3; <ssl.SSLSocket fd=1180, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 1052), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:39 [INFO] User-initiated close: result=BlockingConnection__OnClosedArgs(connection=<SelectConnection CLOSED transport=None params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>, error=ConnectionClosedByClient: (200) 'Normal shutdown')
+2021-10-09 17:38:41 [INFO] 这是进程的第1次等待
+2021-10-09 17:38:41 [INFO] root      14978      1  0 Oct08 ?        00:02:19 nginx: master process /usr/local/nginx/sbin/nginx
+root     347052  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347053  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347054  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347055  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347056  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347057  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347058  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347059  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347060  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347061  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347062  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347063  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347064  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347065  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347066  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347067  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347068  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347069  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347070  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347071  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347072  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347073  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347074  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347075  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347102 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     347117 347102  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:41 [INFO] 当前有24个进程启动成功
+2021-10-09 17:38:41 [INFO] 24个进程全部启动成功
+2021-10-09 17:38:41 [INFO] 当前时间为2021-10-09 17:38:41
+2021-10-09 17:38:41 [INFO] 第一次获取的结果为：
+2021-10-09 17:38:42 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:42 [INFO] Socket connected: <socket.socket fd=1108, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3176), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:42 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=1108, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3176), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:42 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7C6D8>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7C6D8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:42 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7C6D8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:42 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7C6D8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:42 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7C6D8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:42 [INFO] Created channel=1
+2021-10-09 17:38:42 [INFO] 当前时间为2021-10-09 17:38:42
+2021-10-09 17:38:42 [INFO] Pika version 1.1.0 connecting to ('10.10.88.32', 5671)
+2021-10-09 17:38:42 [INFO] Socket connected: <socket.socket fd=1208, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3179), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:42 [INFO] SSL handshake completed successfully: <ssl.SSLSocket fd=1208, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3179), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:42 [INFO] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221ADD358>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221ADD358> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>).
+2021-10-09 17:38:42 [INFO] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221ADD358> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:42 [INFO] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221ADD358> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:42 [INFO] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221ADD358> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>
+2021-10-09 17:38:42 [INFO] Created channel=1
+2021-10-09 17:38:42 [INFO] Created new queue consumer generator <_QueueConsumerGeneratorInfo params=('hf.f1203.g01.xn_17.gw47.up', True, False) consumer_tag='ctag1.214c3c3b4113470f9cabfe6aaf316892'>
+2021-10-09 17:38:42 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:19 nginx: master process /usr/local/nginx/sbin/nginx
+root     347052  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347053  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347054  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347055  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347056  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347057  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347058  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347059  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347060  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347061  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347062  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347063  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347064  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347065  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347066  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347067  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347068  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347069  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347070  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347071  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347072  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347073  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347074  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347075  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347132 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     347133  15062  0 17:38 ?        00:00:00 sh -c ps -ef | grep /usr/local/nginx/sbin/nginx | grep -qv grep
+root     347137 347133  0 17:38 ?        00:00:00 grep /usr/local/nginx/sbin/nginx
+root     347144 347132  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:43 [INFO] 当前时间为2021-10-09 17:38:43
+2021-10-09 17:38:43 [INFO] 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:02:19 nginx: master process /usr/local/nginx/sbin/nginx
+root     347052  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347053  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347054  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347055  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347056  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347057  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347058  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347059  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347060  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347061  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347062  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347063  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347064  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347065  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347066  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347067  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347068  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347069  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347070  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347071  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347072  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347073  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347074  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347075  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347149  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347150  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347151  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347152  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347153  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347154  14978  2 17:38 ?        00:00:00 nginx: worker process
+root     347155  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347156  14978  2 17:38 ?        00:00:00 nginx: worker process
+root     347157  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347158  14978  2 17:38 ?        00:00:00 nginx: worker process
+root     347159  14978  2 17:38 ?        00:00:00 nginx: worker process
+root     347160  14978  2 17:38 ?        00:00:00 nginx: worker process
+root     347161  14978  2 17:38 ?        00:00:00 nginx: worker process
+root     347162  14978  3 17:38 ?        00:00:00 nginx: worker process
+root     347164  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347171  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347172  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347173  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347174  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347175  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347176  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347177  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347178  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347179  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347180 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     347188 347180  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:47 [INFO] Closing connection (200): Normal shutdown
+2021-10-09 17:38:47 [INFO] Closing channel (200): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221ADD358> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:47 [INFO] Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221ADD358> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:47 [INFO] Closing connection (200): 'Normal shutdown'
+2021-10-09 17:38:47 [INFO] Aborting transport connection: state=1; <ssl.SSLSocket fd=1208, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3179), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:47 [INFO] _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; <ssl.SSLSocket fd=1208, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3179), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:47 [INFO] Deactivating transport: state=1; <ssl.SSLSocket fd=1208, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3179), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:47 [INFO] AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:47 [INFO] Stack terminated due to ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:47 [INFO] Closing transport socket and unlinking: state=3; <ssl.SSLSocket fd=1208, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3179), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:47 [INFO] User-initiated close: result=BlockingConnection__OnClosedArgs(connection=<SelectConnection CLOSED transport=None params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>, error=ConnectionClosedByClient: (200) 'Normal shutdown')
+2021-10-09 17:38:48 [INFO] 这是进程的第1次等待
+2021-10-09 17:38:48 [INFO] root      14978      1  0 Oct08 ?        00:02:19 nginx: master process /usr/local/nginx/sbin/nginx
+root     347149  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347150  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347151  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347152  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347153  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347154  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347155  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347156  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347157  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347158  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347159  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347160  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347161  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347162  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347164  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347171  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347172  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347173  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347174  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347175  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347176  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347177  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347178  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347179  14978  0 17:38 ?        00:00:00 nginx: worker process
+root     347214 346492  0 17:38 ?        00:00:00 bash -c ps -ef |grep nginx
+root     347222 347214  0 17:38 ?        00:00:00 grep nginx
+
+2021-10-09 17:38:48 [INFO] 当前有24个进程启动成功
+2021-10-09 17:38:48 [INFO] 24个进程全部启动成功
+2021-10-09 17:38:49 [INFO] Closing connection (200): Normal shutdown
+2021-10-09 17:38:49 [INFO] Closing channel (200): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7C6D8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:49 [INFO] Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x0000024221A7C6D8> params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>>
+2021-10-09 17:38:49 [INFO] Closing connection (200): 'Normal shutdown'
+2021-10-09 17:38:49 [INFO] Aborting transport connection: state=1; <ssl.SSLSocket fd=1108, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3176), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:49 [INFO] _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; <ssl.SSLSocket fd=1108, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3176), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:49 [INFO] Deactivating transport: state=1; <ssl.SSLSocket fd=1108, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3176), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:49 [INFO] AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:49 [INFO] Stack terminated due to ConnectionClosedByClient: (200) 'Normal shutdown'
+2021-10-09 17:38:49 [INFO] Closing transport socket and unlinking: state=3; <ssl.SSLSocket fd=1108, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.10.100.136', 3176), raddr=('10.10.88.32', 5671)>
+2021-10-09 17:38:49 [INFO] User-initiated close: result=BlockingConnection__OnClosedArgs(connection=<SelectConnection CLOSED transport=None params=<ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True>>, error=ConnectionClosedByClient: (200) 'Normal shutdown')

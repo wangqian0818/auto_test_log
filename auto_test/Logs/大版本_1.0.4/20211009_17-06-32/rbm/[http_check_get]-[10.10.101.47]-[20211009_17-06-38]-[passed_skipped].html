@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>测试报告</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (展开详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (隐藏详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+/*
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);*/
+function add_collapse() {  // modify by linux超
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">显示详情</a> / ' +
+                            '<a href="javascript:hide_all_extras()">隐藏详情</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+	// 修改用例报告显示的用例名称 add by linux超
+	var case_name_td = document.getElementsByClassName("col-name");
+		for(var i = 0; i < case_name_td.length; i++)
+			try{
+				case_name_td[i].innerText = case_name_td[i].innerText.split("\[")[1].split("\]")[0];
+			}
+			catch(err){
+				// 如果表格中没有[]会抛异常，如果抛异常我就显示null，如果你想显示别的东西自己改吧，因为通常只要我们使用参数化就有[]显示
+				case_name_td[i].innerText = "测试用例无参数化数据null";
+			}
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>[http_check_get]-[10.10.101.47]-[20211009_17-06-38].html</h1>
+    <p>生成报告时间09-Oct-2021 17:07:26 Pytest-Html版本：<a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.22.1.dev11+g4f729c1</p>
+    <h2>测试环境</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.5.0&apos;, &apos;py&apos;: &apos;1.10.0&apos;, &apos;pluggy&apos;: &apos;0.13.1&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.18362-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;allure-pytest&apos;: &apos;2.8.6&apos;, &apos;assume&apos;: &apos;2.4.2&apos;, &apos;base-url&apos;: &apos;1.4.2&apos;, &apos;cov&apos;: &apos;2.10.1&apos;, &apos;forked&apos;: &apos;1.3.0&apos;, &apos;instafail&apos;: &apos;0.4.2&apos;, &apos;metadata&apos;: &apos;1.11.0&apos;, &apos;ordering&apos;: &apos;0.6&apos;, &apos;reportlog&apos;: &apos;0.1.2&apos;, &apos;rerunfailures&apos;: &apos;9.1.1&apos;, &apos;sugar&apos;: &apos;0.9.4&apos;, &apos;xdist&apos;: &apos;2.2.0&apos;, &apos;html&apos;: &apos;1.22.1.dev11+g4f729c1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.6</td></tr>
+      <tr>
+        <td>用例执行时间</td>
+        <td>2021-10-09 17:06:39</td></tr>
+      <tr>
+        <td>设备IP</td>
+        <td>10.10.101.47</td></tr></table>
+    <h2>用例统计</h2>
+    <p>所属部门: 卓讯-合肥测试部</p>
+    <p>测试人员: 王谦</p>
+    <p>【 -------------------------- 网关设备版本号 ----------------------------- 】</p>
+    <p>【 agentjsac-1.1.906-rc.x86_64 】</p>
+    <p>【 driverjsac-1.1.897-rc.x86_64 】</p>
+    <p>【 libhostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 tsthostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 nginx-0.0.474-kernel_rc.x86_64 】</p>
+    <p>执行了1个测试用例, 历时:47.40秒 . </p>
+    <p class="filter" hidden="true">(取消)勾选复选框, 以便筛选测试结果</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">1 通过</span>, <input checked="true" class="filter" data-test-result="skipped" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">1 跳过</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 失败</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 错误</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 预期失败</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 预期通过</span>, <input checked="true" class="filter" data-test-result="重跑" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="重跑">0 重跑</span>
+    <h2>测试结果</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">通过/失败</th>
+          <th class="sortable time" col="time">Time</th>
+          <th>Test_nodeId</th>
+          <th class="sortable numeric" col="duration">耗时</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">无测试结果, 试着选择其他测试结果条件</th></tr></thead>
+      <tbody class="skipped results-table-row">
+        <tr>
+          <td class="col-result">Skipped</td>
+          <td class="col-time">2021-10-09 09:07:25.222052</td>
+          <td>Case_rbm/http_check_get/function.py::Test_http_check_get::test_http_check_get_a2</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">(&#x27;Case_rbm\\http_check_get\\function.py&#x27;, 139, &#x27;Skipped: unconditional skip&#x27;)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-time">2021-10-09 09:07:18.815152</td>
+          <td>Case_rbm/http_check_get/function.py::Test_http_check_get::test_http_check_get_a1</td>
+          <td class="col-duration">30.80</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">------------------------------ Captured log setup ------------------------------<br/>INFO     paramiko.transport:transport.py:1819 Connected (version 2.0, client OpenSSH_8.3)
+INFO     paramiko.transport:transport.py:1819 Authentication (password) successful!
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:06:41
+INFO     common.fun:fun.py:235 第一次获取的结果为：root      15062      1  3 Oct08 ?        00:48:56 /usr/bin/agentjsac -c /etc/jsac/agentjsac.config
+root     336110 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep agentjsac
+root     336118 336110  0 17:06 ?        00:00:00 grep agentjsac
+
+INFO     common.fun:fun.py:272 当前时间为2021-10-09 17:06:42
+INFO     common.fun:fun.py:275 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:53 nginx: master process /usr/local/nginx/sbin/nginx
+root     334168  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334169  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334170  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334171  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334172  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334173  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334174  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334175  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334176  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334177  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334178  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334186  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334187  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334188  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334189  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334190  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334191  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334192  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334193  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334194  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334195  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334196  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334197  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334198  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     336127 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336138 336127  0 17:06 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:286 这是进程的第1次等待
+INFO     common.fun:fun.py:289 root      14978      1  0 Oct08 ?        00:01:53 nginx: master process /usr/local/nginx/sbin/nginx
+root     334168  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334169  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334170  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334171  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334172  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334173  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334174  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334175  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334176  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334177  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334178  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334186  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334187  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334188  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334189  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334190  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334191  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334192  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334193  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334194  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334195  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334196  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334197  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334198  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     336174 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336182 336174  0 17:06 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:298 当前有24个进程启动成功
+INFO     common.fun:fun.py:301 24个进程全部启动成功------------------------------ Captured log call -------------------------------<br/>INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=896, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19343), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=896, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19343), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EF98E48&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EF98E48&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EF98E48&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EF98E48&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EF98E48&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:06:48
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=1008, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19346), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=1008, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19346), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFBCCC0&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFBCCC0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFBCCC0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFBCCC0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFBCCC0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1963 Created new queue consumer generator &lt;_QueueConsumerGeneratorInfo params=(&#x27;hf.f1203.g01.xn_17.gw47.up&#x27;, True, False) consumer_tag=&#x27;ctag1.28312a87635743a6af94a1e59599320f&#x27;&gt;
+INFO     common.fun:fun.py:235 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:53 nginx: master process /usr/local/nginx/sbin/nginx
+root     334168  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334169  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334170  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334171  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334172  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334173  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334174  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334175  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334176  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334177  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334178  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334186  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334187  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334188  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334189  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334190  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334191  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334192  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334193  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334194  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334195  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334196  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334197  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334198  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     336183 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336184  15062  0 17:06 ?        00:00:00 sh -c python3.6 /opt/nginx/tools/nginx_config.py kernel &gt; /dev/null 2&gt;&amp;1
+root     336187 336184  0 17:06 ?        00:00:00 python3.6 /opt/nginx/tools/nginx_config.py kernel
+root     336193 336183  0 17:06 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:272 当前时间为2021-10-09 17:06:49
+INFO     common.fun:fun.py:275 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:53 nginx: master process /usr/local/nginx/sbin/nginx
+root     334168  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334169  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334170  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334171  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334172  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334173  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334174  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334175  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334176  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334177  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334178  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334186  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334187  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334188  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334189  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334190  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334191  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334192  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334193  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334194  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334195  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334196  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334197  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     334198  14978  0 16:58 ?        00:00:00 nginx: worker process
+root     336230 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336238 336230  0 17:06 ?        00:00:00 grep nginx
+
+INFO     pika.adapters.blocking_connection:blocking_connection.py:788 Closing connection (200): Normal shutdown
+INFO     pika.channel:channel.py:534 Closing channel (200): &#x27;Normal shutdown&#x27; on &lt;Channel number=1 OPEN conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFBCCC0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.channel:channel.py:1119 Received &lt;Channel.CloseOk&gt; on &lt;Channel number=1 CLOSING conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFBCCC0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.connection:connection.py:1295 Closing connection (200): &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:732 Aborting transport connection: state=1; &lt;ssl.SSLSocket fd=1008, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19346), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:907 _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; &lt;ssl.SSLSocket fd=1008, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19346), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:870 Deactivating transport: state=1; &lt;ssl.SSLSocket fd=1008, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19346), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.connection:connection.py:1999 AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.connection:connection.py:2065 Stack terminated due to ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:883 Closing transport socket and unlinking: state=3; &lt;ssl.SSLSocket fd=1008, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19346), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:525 User-initiated close: result=BlockingConnection__OnClosedArgs(connection=&lt;SelectConnection CLOSED transport=None params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;, error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;)
+INFO     common.fun:fun.py:286 这是进程的第1次等待
+INFO     common.fun:fun.py:289 root      14978      1  0 Oct08 ?        00:01:54 nginx: master process /usr/local/nginx/sbin/nginx
+root     336241  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336242  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336243  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336244  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336245  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336246  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336247  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336248  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336249  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336250  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336251  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336252  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336253  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336254  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336255  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336256  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336257  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336258  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336259  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336260  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336261  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336262  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336263  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336264  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336265 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336273 336265  0 17:06 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:298 当前有24个进程启动成功
+INFO     common.fun:fun.py:301 24个进程全部启动成功
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:06:54
+INFO     common.fun:fun.py:235 第一次获取的结果为：tcp        0      0 10.10.101.47:2287       0.0.0.0:*               LISTEN      14978/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      14978/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13089/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12556/zabbix_agentd 
+tcp        0      0 10.10.101.47:9144       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp        0      0 10.10.101.47:22         10.10.100.136:1187      ESTABLISHED 24702/sshd: root@pt 
+tcp        0      0 10.10.101.47:22         10.10.100.136:19295     ESTABLISHED 335957/sshd: root@n 
+tcp    83435      0 10.10.101.47:9146       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp6       0      0 :::20022                :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      13089/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12556/zabbix_agentd 
+
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=980, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19354), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=980, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19354), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F07EA90&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F07EA90&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F07EA90&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F07EA90&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F07EA90&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:06:55
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=944, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19357), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=944, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19357), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFF7780&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFF7780&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFF7780&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFF7780&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFF7780&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1963 Created new queue consumer generator &lt;_QueueConsumerGeneratorInfo params=(&#x27;hf.f1203.g01.xn_17.gw47.up&#x27;, True, False) consumer_tag=&#x27;ctag1.0151270aafef436f9738dbe0f8c49565&#x27;&gt;
+INFO     common.fun:fun.py:235 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:54 nginx: master process /usr/local/nginx/sbin/nginx
+root     336241  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336242  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336243  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336244  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336245  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336246  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336247  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336248  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336249  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336250  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336251  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336252  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336253  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336254  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336255  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336256  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336257  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336258  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336259  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336260  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336261  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336262  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336263  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336264  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336283 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336284  15062  0 17:06 ?        00:00:00 sh -c python3.6 /opt/nginx/tools/lua_config.py &gt; /dev/null 2&gt;&amp;1
+root     336286 336284  0 17:06 ?        00:00:00 python3.6 /opt/nginx/tools/lua_config.py
+root     336293 336283  0 17:06 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:272 当前时间为2021-10-09 17:06:56
+INFO     common.fun:fun.py:275 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     336241  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336242  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336243  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336244  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336245  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336246  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336247  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336248  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336249  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336250  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336251  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336252  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336253  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336254  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336255  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336256  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336257  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336258  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336259  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336260  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336261  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336262  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336263  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336264  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336301  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336302  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336303  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336304  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336305  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336306  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336307  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336308  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336309 335957  0 17:06 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336312  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336318 336309  0 17:06 ?        00:00:00 grep nginx
+root     336319  14978  0 17:06 ?        00:00:00 nginx: worker process
+
+INFO     pika.adapters.blocking_connection:blocking_connection.py:788 Closing connection (200): Normal shutdown
+INFO     pika.channel:channel.py:534 Closing channel (200): &#x27;Normal shutdown&#x27; on &lt;Channel number=1 OPEN conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFF7780&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.channel:channel.py:1119 Received &lt;Channel.CloseOk&gt; on &lt;Channel number=1 CLOSING conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361EFF7780&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.connection:connection.py:1295 Closing connection (200): &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:732 Aborting transport connection: state=1; &lt;ssl.SSLSocket fd=944, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19357), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:907 _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; &lt;ssl.SSLSocket fd=944, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19357), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:870 Deactivating transport: state=1; &lt;ssl.SSLSocket fd=944, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19357), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.connection:connection.py:1999 AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.connection:connection.py:2065 Stack terminated due to ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:883 Closing transport socket and unlinking: state=3; &lt;ssl.SSLSocket fd=944, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19357), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:525 User-initiated close: result=BlockingConnection__OnClosedArgs(connection=&lt;SelectConnection CLOSED transport=None params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;, error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;)
+INFO     common.fun:fun.py:286 这是进程的第1次等待
+INFO     common.fun:fun.py:289 root      14978      1  0 Oct08 ?        00:01:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     336301  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336302  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336303  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336304  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336305  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336306  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336307  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336308  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336312  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336319  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336320  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336321  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336322  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336323  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336324  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336325  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336326  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336327  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336328  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336329  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336330  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336331  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336332  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336333  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336350 335957  0 17:07 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336358 336350  0 17:07 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:298 当前有24个进程启动成功
+INFO     common.fun:fun.py:301 24个进程全部启动成功
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:07:01
+INFO     common.fun:fun.py:235 第一次获取的结果为：{
+	&quot;c_get_args&quot;:	{
+		&quot;w&quot;:	0,
+		&quot;k&quot;:	[&quot;123&quot;]
+	}
+}
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:07:02
+INFO     common.fun:fun.py:235 第一次获取的结果为：{
+	&quot;c_get_args&quot;:	{
+		&quot;w&quot;:	0,
+		&quot;k&quot;:	[&quot;123&quot;]
+	}
+}
+INFO     http_check_get.function:function.py:102 get普通请求的请求内容为：You got right!
+INFO     paramiko.transport.sftp:sftp.py:158 [chan 30] Opened sftp connection (server version 3)
+INFO     http_check_get.function:function.py:112 get请求内容不包含黑名单的请求应返回的内容为：You got right!
+INFO     http_check_get.function:function.py:118 get请求内容包含黑名单返回的状态码为：403
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19375), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=1072, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19375), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0B8CF8&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0B8CF8&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0B8CF8&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0B8CF8&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0B8CF8&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:07:04
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=1136, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19378), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=1136, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19378), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ADF98&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ADF98&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ADF98&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ADF98&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ADF98&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1963 Created new queue consumer generator &lt;_QueueConsumerGeneratorInfo params=(&#x27;hf.f1203.g01.xn_17.gw47.up&#x27;, True, False) consumer_tag=&#x27;ctag1.6f590297dba943dbb9ce0b2bfb5403fa&#x27;&gt;
+INFO     common.fun:fun.py:235 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     336301  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336302  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336303  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336304  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336305  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336306  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336307  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336308  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336312  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336319  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336320  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336321  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336322  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336323  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336324  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336325  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336326  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336327  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336328  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336329  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336330  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336331  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336332  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336333  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336401 335957  0 17:07 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336402  15062  0 17:07 ?        00:00:00 sh -c python3.6 /opt/nginx/tools/nginx_config.py kernel &gt; /dev/null 2&gt;&amp;1
+root     336404 336402  0 17:07 ?        00:00:00 python3.6 /opt/nginx/tools/nginx_config.py kernel
+root     336411 336401  0 17:07 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:272 当前时间为2021-10-09 17:07:05
+INFO     common.fun:fun.py:275 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     336301  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336302  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336303  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336304  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336305  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336306  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336307  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336308  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336312  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336319  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336320  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336321  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336322  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336323  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336324  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336325  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336326  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336327  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336328  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336329  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336330  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336331  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336332  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336333  14978  0 17:06 ?        00:00:00 nginx: worker process
+root     336455 335957  0 17:07 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336463 336455  0 17:07 ?        00:00:00 grep nginx
+
+INFO     pika.adapters.blocking_connection:blocking_connection.py:788 Closing connection (200): Normal shutdown
+INFO     pika.channel:channel.py:534 Closing channel (200): &#x27;Normal shutdown&#x27; on &lt;Channel number=1 OPEN conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ADF98&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.channel:channel.py:1119 Received &lt;Channel.CloseOk&gt; on &lt;Channel number=1 CLOSING conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ADF98&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.connection:connection.py:1295 Closing connection (200): &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:732 Aborting transport connection: state=1; &lt;ssl.SSLSocket fd=1136, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19378), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:907 _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; &lt;ssl.SSLSocket fd=1136, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19378), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:870 Deactivating transport: state=1; &lt;ssl.SSLSocket fd=1136, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19378), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.connection:connection.py:1999 AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.connection:connection.py:2065 Stack terminated due to ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:883 Closing transport socket and unlinking: state=3; &lt;ssl.SSLSocket fd=1136, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19378), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:525 User-initiated close: result=BlockingConnection__OnClosedArgs(connection=&lt;SelectConnection CLOSED transport=None params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;, error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;)
+INFO     common.fun:fun.py:286 这是进程的第1次等待
+INFO     common.fun:fun.py:289 root      14978      1  0 Oct08 ?        00:01:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     336464  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336465  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336466  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336467  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336468  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336469  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336470  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336471  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336472  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336473  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336474  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336475  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336476  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336477  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336478  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336479  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336480  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336481  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336482  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336483  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336484  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336485  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336486  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336487  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336510 335957  0 17:07 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336518 336510  0 17:07 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:298 当前有24个进程启动成功
+INFO     common.fun:fun.py:301 24个进程全部启动成功
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:07:10
+INFO     common.fun:fun.py:235 第一次获取的结果为：tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12609/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      14978/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      13089/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12556/zabbix_agentd 
+tcp        0      0 10.10.101.47:9144       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp        0      0 10.10.101.47:22         10.10.100.136:1187      ESTABLISHED 24702/sshd: root@pt 
+tcp        0      0 10.10.101.47:22         10.10.100.136:19295     ESTABLISHED 335957/sshd: root@n 
+tcp    83435      0 10.10.101.47:9146       10.10.88.32:5671        ESTABLISHED 15062/agentjsac     
+tcp6       0      0 :::20022                :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12609/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      13089/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12556/zabbix_agentd 
+
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=732, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19391), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=732, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19391), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ED048&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ED048&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ED048&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ED048&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0ED048&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:07:11
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:179 Pika version 1.1.0 connecting to (&#x27;10.10.88.32&#x27;, 5671)
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:345 Socket connected: &lt;socket.socket fd=972, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19394), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:656 SSL handshake completed successfully: &lt;ssl.SSLSocket fd=972, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19394), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:428 Streaming transport linked up: (&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0E25C0&gt;, _StreamingProtocolShim: &lt;SelectConnection PROTOCOL transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0E25C0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;).
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:293 AMQPConnector - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0E25C0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.utils.connection_workflow:connection_workflow.py:725 AMQPConnectionWorkflow - reporting success: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0E25C0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:453 Connection workflow succeeded: &lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0E25C0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1247 Created channel=1
+INFO     pika.adapters.blocking_connection:blocking_connection.py:1963 Created new queue consumer generator &lt;_QueueConsumerGeneratorInfo params=(&#x27;hf.f1203.g01.xn_17.gw47.up&#x27;, True, False) consumer_tag=&#x27;ctag1.ee331e1a00fb49b886a22359c00900e5&#x27;&gt;
+INFO     common.fun:fun.py:235 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:55 nginx: master process /usr/local/nginx/sbin/nginx
+root     336464  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336465  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336466  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336467  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336468  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336469  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336470  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336471  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336472  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336473  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336474  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336475  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336476  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336477  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336478  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336479  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336480  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336481  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336482  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336483  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336484  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336485  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336486  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336487  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336528 335957  0 17:07 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336538 336528  0 17:07 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:272 当前时间为2021-10-09 17:07:12
+INFO     common.fun:fun.py:275 第一次获取的结果为：root      14978      1  0 Oct08 ?        00:01:56 nginx: master process /usr/local/nginx/sbin/nginx
+root     336464  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336465  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336466  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336467  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336468  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336469  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336470  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336471  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336472  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336473  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336474  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336475  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336476  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336477  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336478  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336479  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336480  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336481  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336482  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336483  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336484  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336485  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336486  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336487  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336546  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336547  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336548  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336549  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336550  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336551  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336552  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336553  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336554  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336555  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336556  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336557  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336558  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336559  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336560  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336561  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336562  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336563  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336564  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336565  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336566  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336567  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336568  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336569 335957  0 17:07 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336572  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336578 336569  0 17:07 ?        00:00:00 grep nginx
+
+INFO     pika.adapters.blocking_connection:blocking_connection.py:788 Closing connection (200): Normal shutdown
+INFO     pika.channel:channel.py:534 Closing channel (200): &#x27;Normal shutdown&#x27; on &lt;Channel number=1 OPEN conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0E25C0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.channel:channel.py:1119 Received &lt;Channel.CloseOk&gt; on &lt;Channel number=1 CLOSING conn=&lt;SelectConnection OPEN transport=&lt;pika.adapters.utils.io_services_utils._AsyncSSLTransport object at 0x000002361F0E25C0&gt; params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;&gt;
+INFO     pika.connection:connection.py:1295 Closing connection (200): &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:732 Aborting transport connection: state=1; &lt;ssl.SSLSocket fd=972, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19394), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:907 _AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=None; &lt;ssl.SSLSocket fd=972, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19394), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:870 Deactivating transport: state=1; &lt;ssl.SSLSocket fd=972, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19394), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.connection:connection.py:1999 AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=None; pending-error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.connection:connection.py:2065 Stack terminated due to ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;
+INFO     pika.adapters.utils.io_services_utils:io_services_utils.py:883 Closing transport socket and unlinking: state=3; &lt;ssl.SSLSocket fd=972, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=(&#x27;10.10.100.136&#x27;, 19394), raddr=(&#x27;10.10.88.32&#x27;, 5671)&gt;
+INFO     pika.adapters.blocking_connection:blocking_connection.py:525 User-initiated close: result=BlockingConnection__OnClosedArgs(connection=&lt;SelectConnection CLOSED transport=None params=&lt;ConnectionParameters host=10.10.88.32 port=5671 virtual_host=/ ssl=True&gt;&gt;, error=ConnectionClosedByClient: (200) &#x27;Normal shutdown&#x27;)
+INFO     common.fun:fun.py:286 这是进程的第1次等待
+INFO     common.fun:fun.py:289 root      14978      1  0 Oct08 ?        00:01:56 nginx: master process /usr/local/nginx/sbin/nginx
+root     336546  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336547  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336548  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336549  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336550  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336551  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336552  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336553  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336554  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336555  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336556  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336557  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336558  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336559  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336560  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336561  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336562  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336563  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336564  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336565  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336566  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336567  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336568  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336572  14978  0 17:07 ?        00:00:00 nginx: worker process
+root     336583 335957  0 17:07 ?        00:00:00 bash -c ps -ef |grep nginx
+root     336591 336583  0 17:07 ?        00:00:00 grep nginx
+
+INFO     common.fun:fun.py:298 当前有24个进程启动成功
+INFO     common.fun:fun.py:301 24个进程全部启动成功
+INFO     common.fun:fun.py:232 当前时间为2021-10-09 17:07:17
+INFO     common.fun:fun.py:235 第一次获取的结果为：</div></td></tr></tbody></table></body></html>

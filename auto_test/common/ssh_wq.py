@@ -7,15 +7,17 @@ import sys
 import paramiko
 
 import logging
-logger = paramiko.util.logging.getLogger()
-logger.setLevel(logging.WARNING)
-# paramiko.util.log_to_file('paramiko.log')
+log = logging.getLogger(__name__)
+# logger = paramiko.util.logging.getLogger()
+# logger.setLevel(logging.WARNING)
+# # paramiko.util.log_to_file('paramiko.log')
+# logging.getLogger("paramiko").setLevel(logging.WARNING)
 
 class ssh:
 
     def __init__(self, host='', name='', passwd='', port=22, timeout=30):
         if (not host) or (not name) or (not passwd):
-            print('ssh服务器地址,帐号和密码都不能为空!')
+            log.warning('ssh服务器地址,帐号和密码都不能为空!')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         self.hostname = host
         self.password = passwd
@@ -28,43 +30,43 @@ class ssh:
         try:
             self.ssh = paramiko.SSHClient()
         except Exception as err:
-            print('调用paramiko.SSHClient()创建ssh连接对象失败!错误内容如下:')
-            print(err)
+            log.warning('调用paramiko.SSHClient()创建ssh连接对象失败!错误内容如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         # 将信任的主机添加到host_allow
         try:
             self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         except Exception as err:
-            print('将信任的主机: ' + str(self.hostname) + '添加到host_allow失败!错误内容如下:')
-            print(err)
+            log.warning('将信任的主机: ' + str(self.hostname) + '添加到host_allow失败!错误内容如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         else:
             # ssh服务器连接状态：0表示初始化完成，1表示连接成功
             self.__state = 0
-            print('ssh初始化: ' + str(self.hostname) + '完成!')
+            log.warning('ssh初始化: ' + str(self.hostname) + '完成!')
 
     def connect(self):
-        print("ssh 连接开始")
+        log.warning("ssh 连接开始")
         try:
             # 建立连接
             self.ssh.connect(hostname=self.hostname, password=self.password, port=self.port, username=self.username)
             # ssh服务器连接状态
             self.__state = 1
-            print('ssh连接主机：' + self.hostname + '  完成!')
+            log.warning('ssh连接主机：' + self.hostname + '  完成!')
         except paramiko.AuthenticationException:
-            print("连接 %s 时，验证失败" % self.hostname)
+            log.warning("连接 %s 时，验证失败" % self.hostname)
             sys.exit(1)
         # 更改连接状态：0表示初始化完成，1表示连接成功
         self.__state = 1
-        print('ssh服务器: ' + str(self.hostname) + '连接成功')
+        log.warning('ssh服务器: ' + str(self.hostname) + '连接成功')
 
     def cmd(self, cmd='ls -l', thread=0, timeout=0, list_flag=False):
         # 查看连接状态
         if not self.__state:
-            print('ssh初始化未完成，程序友好退出')
+            log.warning('ssh初始化未完成，程序友好退出')
             sys.exit(1)
         if self.__state == 0:
-            print('ssh连接主机{}失败，程序友好退出', self.hostname)
+            log.warning('ssh连接主机{}失败，程序友好退出', self.hostname)
             sys.exit(1)
         # 如果cmd是包含多个命令的list，list_flag=True
         if list_flag:
@@ -124,18 +126,18 @@ class ssh:
                         stdout.channel.close()
                         break  # 当远端完成并且我们的缓冲区为空时退出
 
-                # print('--------- stdout_chunks:\n{}\n-----------'.format(stdout_chunks))
+                # log.warning('--------- stdout_chunks:\n{}\n-----------'.format(stdout_chunks))
                 b = [str(j) for j in stdout_chunks]
-                # print(b)
+                # log.warning(b)
                 out = ''.join(b)
-                # print('--------- \n', out)
+                # log.warning('--------- \n', out)
 
                 # 关闭所有文件描述符
                 stdout.close()
                 stderr.close()
                 return out
             # except Exception as err:
-            #     print('发送命令错误：{}'.format(err))
+            #     log.warning('发送命令错误：{}'.format(err))
             #     return None
 
         # if want_exitcode:
@@ -146,12 +148,12 @@ class ssh:
     def close(self):
         # 查看连接状态
         if not self.__state:
-            print('ssh初始化未完成，程序友好退出')
+            log.warning('ssh初始化未完成，程序友好退出')
             sys.exit(1)
         if self.__state == 0:
-            print('ssh未连接主机{}，程序友好退出', self.hostname)
+            log.warning('ssh未连接主机{}，程序友好退出', self.hostname)
             sys.exit(1)
-        print("Command done, closing SSH connection")
+        log.warning("Command done, closing SSH connection")
         self.ssh.close()
         self.channel.close()
 
@@ -165,46 +167,46 @@ class ssh:
         try:
             transport = paramiko.Transport((self.hostname, int(self.port)))
         except Exception as err:
-            print('sftp文件传输通道初始化失败!请检查ssh服务器地址和端口号是否正确.\n错误内容如下:')
-            print(err)
+            log.warning('sftp文件传输通道初始化失败!请检查ssh服务器地址和端口号是否正确.\n错误内容如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:
             transport.connect(username=self.username, password=self.password)
         except Exception as err:
-            print('sftp文件传输通道连接失败!请检查ssh服务器登陆名和密码是否正确.\n错误内容如下:')
-            print(err)
+            log.warning('sftp文件传输通道连接失败!请检查ssh服务器登陆名和密码是否正确.\n错误内容如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         try:
             sftp = paramiko.SFTPClient.from_transport(transport)
         except Exception as err:
-            print('sftp文件传输通道创建失败!请检查网络和服务器状态.\n服务器地址和帐号都没问题.\n错误内容如下:')
-            print(err)
+            log.warning('sftp文件传输通道创建失败!请检查网络和服务器状态.\n服务器地址和帐号都没问题.\n错误内容如下:')
+            log.warning(err)
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if (not local_path) or (not ssh_path):
-            print('本地路径和远程路径都不能为空!')
+            log.warning('本地路径和远程路径都不能为空!')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         if method == 'get':
             try:
                 sftp.get(ssh_path, local_path)
             except Exception as err:
-                print('错误!!!将远程: ' + str(ssh_path) + '文件下载到本地: ' + str(local_path) + ' 失败!错误内容如下:')
-                print(err)
+                log.warning('错误!!!将远程: ' + str(ssh_path) + '文件下载到本地: ' + str(local_path) + ' 失败!错误内容如下:')
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
-                print('成功!!!将远程: ' + str(ssh_path) + '文件下载到本地: ' + str(local_path) + ' 完成!')
+                log.warning('成功!!!将远程: ' + str(ssh_path) + '文件下载到本地: ' + str(local_path) + ' 完成!')
                 sftp.close()  # 及时关闭sftp连接,下次需要重新调用当前方法就可创建新的连接
         elif method == 'put':
             try:
                 sftp.put(local_path, ssh_path)
             except Exception as err:
-                print('错误!!!将本地: ' + str(local_path) + '文件上传到ssh服务器: ' + str(ssh_path) + ' 失败!错误内容如下:')
-                print(err)
+                log.warning('错误!!!将本地: ' + str(local_path) + '文件上传到ssh服务器: ' + str(ssh_path) + ' 失败!错误内容如下:')
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
-                print('成功!!!将本地: ' + str(local_path) + '文件上传到ssh服务器: ' + str(ssh_path) + ' 完成!')
+                log.warning('成功!!!将本地: ' + str(local_path) + '文件上传到ssh服务器: ' + str(ssh_path) + ' 完成!')
                 sftp.close()  # 及时关闭sftp连接,下次需要重新调用当前方法就可创建新的连接
         else:
-            print('sftp操作文件方式只有get(下载文件)和put(上传文件)两种,其它操作无效!\n默认操作方式为get,下载文件.请检查sftp方法的参数是否有误.')
+            log.warning('sftp操作文件方式只有get(下载文件)和put(上传文件)两种,其它操作无效!\n默认操作方式为get,下载文件.请检查sftp方法的参数是否有误.')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
 
     def open(self, file_path='', fun='read', mode='r', text=''):
@@ -240,52 +242,52 @@ class ssh:
         text为写模式下,要写入的内容
         '''
         if not self.__state:
-            print('ssh服务器未连接或连接失败,请执行:实例化类名.connect()连接ssh服务器后再执行当前方法')
+            log.warning('ssh服务器未连接或连接失败,请执行:实例化类名.connect()连接ssh服务器后再执行当前方法')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         else:
             if not file_path:
-                print('请输入要操作的远程文件路径!')
+                log.warning('请输入要操作的远程文件路径!')
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             try:
                 sftp_open = self.ssh.open_sftp()
             except Exception as err:
-                print('sftp操作文件通道创建失败!错误内容如下:')
-                print(err)
+                log.warning('sftp操作文件通道创建失败!错误内容如下:')
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
                 try:
                     fun_file = sftp_open.open(file_path, mode)
                 except Exception as err:
-                    print('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 连接失败!错误内容如下:')
-                    print(err)
+                    log.warning('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 连接失败!错误内容如下:')
+                    log.warning(err)
                     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                 else:
                     if fun == 'read':
                         try:
                             file_text = fun_file.read()  # 如果执行的是读文件操作,就返回文件读取结果
                         except Exception as err:
-                            print('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 读取失败!错误内容如下:')
-                            print(err)
+                            log.warning('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 读取失败!错误内容如下:')
+                            log.warning(err)
                             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                         else:
-                            print('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 读取成功!')
+                            log.warning('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 读取成功!')
                             fun_file.close()  # 执行完毕及时关闭文件连接
                             return file_text
                     elif fun == 'write':
                         if not text:
-                            print('当前写入内容为空!!!')
+                            log.warning('当前写入内容为空!!!')
                         try:
                             fun_file.write(text)
                         except Exception as err:
-                            print('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 写入失败!错误内容如下:')
-                            print(err)
+                            log.warning('文件 ' + str(self.hostname) + ':' + str(file_path) + ' 写入失败!错误内容如下:')
+                            log.warning(err)
                             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                         else:
-                            print('向文件: ' + str(self.hostname) + ':' + str(file_path) + ' 中写入: ' + str(text) + ' 成功')
+                            log.warning('向文件: ' + str(self.hostname) + ':' + str(file_path) + ' 中写入: ' + str(text) + ' 成功')
                             fun_file.close()  # 执行完毕及时关闭文件连接
                             return 'ok'  # 写成功返回特定字符串,为了和读操作进行匹配,避免无返回值的空值操作
                     else:
-                        print('当前仅支持read和write操作!!!请检查操作方法是否有误.')
+                        log.warning('当前仅支持read和write操作!!!请检查操作方法是否有误.')
                         sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
 
     def search(self, path='', end=''):
@@ -296,14 +298,14 @@ class ssh:
         end为想要返回的文件后缀名,可以留空,意味着返回所有的文件类型
         '''
         if not self.__state:
-            print('ssh服务器未连接或连接失败,请执行:实例化类名.connect()连接ssh服务器后再执行当前方法')
+            log.warning('ssh服务器未连接或连接失败,请执行:实例化类名.connect()连接ssh服务器后再执行当前方法')
             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
         else:
             try:
                 sftp_search = self.ssh.open_sftp()
             except Exception as err:
-                print('ssh查找文件通道创建失败!请检查网络和ssh服务器地址,端口号,帐号和密码是否有误.\n错误内容如下:')
-                print(err)
+                log.warning('ssh查找文件通道创建失败!请检查网络和ssh服务器地址,端口号,帐号和密码是否有误.\n错误内容如下:')
+                log.warning(err)
                 sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
             else:
                 try:  # 查找文件夹
@@ -312,8 +314,8 @@ class ssh:
                     else:
                         file_name = sftp_search.listdir()
                 except Exception as err:
-                    print('查找路径: ' + str(path) + '下的所有文件和文件夹失败!错误内容如下:')
-                    print(err)
+                    log.warning('查找路径: ' + str(path) + '下的所有文件和文件夹失败!错误内容如下:')
+                    log.warning(err)
                     sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                 else:
                     if end:
@@ -324,8 +326,8 @@ class ssh:
                                     file_name_0.append(i)
                             file_name = file_name_0[:]
                         except Exception as err:
-                            print('查找路径: ' + str(path) + '下的所有以: ' + str(end) + ' 结尾的文件失败!错误内容如下:')
-                            print(err)
+                            log.warning('查找路径: ' + str(path) + '下的所有以: ' + str(end) + ' 结尾的文件失败!错误内容如下:')
+                            log.warning(err)
                             sys.exit(0)  # 避免程序继续运行造成的异常崩溃,友好退出程序
                     return file_name
 
@@ -343,5 +345,5 @@ if __name__ == '__main__':
     # re = ssh.cmd(cmd='ps -ef |grep jsac')
     # cmd = ['cd /opt', 'who', 'pwd', 'ls -ahl']
     # re = ssh.cmd(cmd=cmd, list_flag=True)
-    print("re:\n", re)
+    log.warning("re:\n", re)
     ssh.close()
