@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\auto_test\Logs\大版本_1.0.4\20211016_12-59-39\rbm\[http_check_get]-[10.10.101.47]-[20211016_12-59-44].txt">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\run.py">
           <value>
             <Attribute>
